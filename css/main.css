@@ -63,8 +63,7 @@ body {
 	width: 100%;
 	background: #4568DC;  /* fallback for old browsers */
 	box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
-	margin: 0px;
-
+	margin: 0px !important; 
 }
 .navbar > ul {
 	margin: 0px;
@@ -99,6 +98,104 @@ body {
 .navbar > ul li a:hover::before {
 	width: 100%;
 }
+
+/*main*/
+.main_image {
+	height: 400px;
+	width: 100%;
+	padding-top: 100px;
+  
+	background-image: url('../src/main_background.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+  }
+
+  .intro-text {
+	margin-top: 30px;
+	font-size: 30px;
+	font-weight: bold;
+	color: white;
+	letter-spacing: -1px;
+  }
+
+  .intro-color {
+	color: #FCEA4D;
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-position: under;
+  }
+
+  .main_rent {
+	margin-top: 55px;
+	background-color: rgba(0, 0, 0, 0.3);
+	height: 120px;
+	width: 100%;
+  }
+
+  .rent-text {
+	display: block;
+	color: white;
+	text-align: right;
+	font-size: 35px;
+	font-weight: bold;
+	margin-top: 30px;
+	text-decoration: none !important;
+  }
+
+  .main_item {
+	width: 100%;
+	align-items: center;
+  }
+
+  .item_image {
+	display: block;
+	width: 300px;
+	height: 200px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	margin-left: 20px;
+	margin-right: 20px;
+	align-items: center;
+	box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .main_site {
+	position:relative;
+	width:100%;
+	height:300px;
+	padding-top:70px;
+	box-sizing:border-box;
+	background: #F8F8F8;
+  }
+
+  .main_site_logo {
+	width: 60px;
+	margin-left: 40px;
+  }
+
+  .main_site h3 {
+	display:inline-block;
+	font-size: 30px;
+	color:#333;
+	font-weight:900;
+	z-index:3;
+	line-height:1.2em;
+	width:230px;
+  }
+
+  .main_site ul.site-name {
+	float: right;
+	width:100%;
+	margin-top:10px;
+	list-style: none;
+  }
+
+  .main_site ul.site-name li {
+	float:right;
+	margin-right:35.6px;
+	margin-bottom:20px;
+  }
 
 /* footer design */
 .site-footer {
