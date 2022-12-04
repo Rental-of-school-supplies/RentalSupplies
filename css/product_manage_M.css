@@ -117,14 +117,39 @@ body {
 }
 
 /*main*/
-<<<<<<< HEAD
-=======
-
->>>>>>> 2d91bbe66b5c3dee177f04d7d68b9bb6f13e0fee
-.product_req {
+.current_product {
     margin-bottom: 7%;
 }
+#deleteButton{
+    position: absolute;
+    width: 161px;
+    height: 48px;
+    left: 926px;
+    top: 400px;
+    
+    font-size: large;
 
+    border: 0;
+    outline: 0;
+
+    background: #4568DC;
+    color:white;
+}
+#insertButton{
+    position: absolute;
+    width: 161px;
+    height: 48px;
+    left: 1109px;
+    top: 400px;
+
+    font-size: large;
+    
+    border: 0;
+    outline: 0;
+
+    background: #4568DC;
+    color:white;
+}
 .table-name {
     text-align: left;
     font-size: 22px;
@@ -133,12 +158,12 @@ body {
     margin-bottom: 3%;
 }
 
-.rental-table {
+.product-table {
     width: 100%;
     text-align: center;
 }
 
-.rental-table>thead tr th {
+.product-table>thead tr th {
     text-align: center;
     padding: 15px 0px;
     border-top: 2px solid black;
@@ -146,7 +171,7 @@ body {
     font-size: 20px;
 }
 
-.rental-table>tbody tr td {
+.product-table>tbody tr td {
     padding: 15px 0px;
     font-size: 18px;
 }
