@@ -117,33 +117,45 @@ body {
 }
 
 /*main*/
-.product_req {
-    margin-bottom: 7%;
+.product_list {
+    width: 100%;
+    display: flex;
+}
+
+.product {
+    width: 33%;
+    flex: 1;
+    margin: 5% 1%;
 }
 
 .table-name {
-    text-align: left;
+    text-align: center;
     font-size: 22px;
     font-weight: bold;
-    margin-top: 7%;
-    margin-bottom: 3%;
+    margin-top: 6%;
+    margin-bottom: 4%;
 }
 
 .rental-table {
     width: 100%;
     text-align: center;
-}
-
-.rental-table>thead tr th {
-    text-align: center;
-    padding: 15px 0px;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    font-size: 20px;
+    border: 2px solid black;
 }
 
 .rental-table>tbody tr td {
-    padding: 15px 0px;
+    padding: 10px 0px;
+    font-size: 18px;
+}
+
+.reserve-table {
+    width: 100%;
+    text-align: center;
+    border: 2px solid black;
+    border-top: none;
+}
+
+.reserve-table>tbody tr td {
+    padding: 10px 0px;
     font-size: 18px;
 }
 
@@ -157,6 +169,30 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover {
     background-color: #e8e8e8;
+}
+
+.btn-rent {
+    display: block;
+    margin: auto;
+    text-align: center;
+    background-color: #4568DC;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    padding: 8px 10px;
+    border-radius: 5px;
+}
+
+.btn-reserve {
+    display: block;
+    margin: auto;
+    text-align: center;
+    background-color: #d9d9d9;
+    color: #4568DC;
+    border: none;
+    font-size: 18px;
+    padding: 8px 10px;
+    border-radius: 5px;
 }
 
 /* footer design */
