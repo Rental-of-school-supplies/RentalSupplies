@@ -3,7 +3,7 @@
 
 <head>
     <title>product_req</title>
-    <link rel="stylesheet" href="../css/product_req.css" type="text/css">
+    <link rel="stylesheet" href="../css/location.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -39,26 +39,26 @@
         </ul>
     </nav>
 
-    <section class="product_req">
-        <div class="container">
-            <div class="inner">
-                <div class="product_name">
-                    <label class="title_text" for="title">신청할 물품 이름</label>
-                    <input class="title_input" type="text" name="title" maxlength="100" required="required"
-                        pattern=".{4,100}">
-                    <button class="btn_confirm" type="submit" style="display: inline-block;">확인</button>
-                    <p class="check_text">물품 명을 입력한 후 확인 버튼을 꼭 눌러주세요!</p>
-                </div>
-
-                <label class="content_text">신청사유</label>
-                <textarea class="content_input" name="content" cols="70" rows="5"></textarea>
-                <button class="btn_confirm" type="submit">제출하기</button>
-
-            </div>
-
+    <div class="container">
+        <div>
+            <p class="head-title">찾아오시는 길</p>
         </div>
-    </section>
 
+        <hr style="border: 0.7px solid black; width: 90%;">
+
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2216.0250538063087!2d127.45434338894304!3d36.626425989153724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565293695b9f291%3A0x14f446d8e1ea681f!2sS4-1%20Chungbuk%20National%20University%20Electronic%20Information%20Building%203!5e0!3m2!1sen!2skr!4v1670206427995!5m2!1sen!2skr" 
+            width="1100" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+
+        <div class="border-box">
+            <p class="address-title"><span class="address-title-color">소프트웨어학부</span> 학생회실</p>
+            <p class="address">충북 청주시 서원구 충대로1 충북대학교 전자정보대학 소프트웨어학부 S4-1동(전자정보 3관) 109호</p>
+        </div>
+    </div>
+       
+
+            
     <!-- footer -->
     <footer class="site-footer">
         <div class="container">
