@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <title>Rental-Of-school-supplies</title>
-    <link rel="stylesheet" href="../css/mypage.css" type="text/css">
+    <title>product_req_M</title>
+    <link rel="stylesheet" href="../css/product_req_M.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -15,10 +15,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../jquery-fadethis-master/libs/jquery/jquery.js"></script>
     <script src="../jquery-fadethis-master/dist/jquery.fadethis.min.js"></script>
-
 </head>
 
 <body>
+    <?php session_start(); ?>
+    <?php require_once '../php/process.php'; ?>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
         <img src="../src/logo.PNG" alt="logo" height="120px">
@@ -35,14 +36,17 @@
         <ul>
             <li><a href="#">물품 목록</a></li>
             <li><a href="#">물품 신청</a></li>
-            <li><a href="#">찾아오시는 길</a></li>
+            <li><a href="#">물품 관리</a></li>
             <li><a href="#">팀 소개</a></li>
         </ul>
     </nav>
-
-    <section class="current_rental">
+    <?php
+    $mysqli = new mysqli('localhost:3306', 'root', '010510', '3idiots') or die(mysqli_error($mysqli));
+    $result = $mysqli->query("SELECT * FROM requestion") or die($mysqli->error);
+    ?>
+    <section class="product_req">
         <div class="container">
-            <h3 class="table-name">현재 대여 중인 물품</h3>
+            <h3 class="table-name">물품 신청 내역</h3>
             <table class="rental-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
@@ -51,66 +55,21 @@
                     <tr>
                         <th></th>
                         <th>물품명</th>
-                        <th>대여일</th>
-                        <th>반납 기한</th>
+                        <th>신청 사유</th>
+                        <th>신청자</th>
+                        <th>신청일</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php while ($row = $result->fetch_assoc()):?>
                     <tr>
-                        <td>1</td>
-                        <td>보조 배터리</td>
-                        <td>2022-12-03</td>
-                        <td>2022-12-10 까지</td>
+                        <td><?php echo $row['ReqID']; ?></td>
+                        <td><?php echo $row['Req_Pname']; ?></td>
+                        <td><?php echo $row['Req_Content']; ?></td>
+                        <td><?php echo $row['SID']; ?></td>
+                        <td><?php echo $row['Request_Date']; ?></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>담요</td>
-                        <td>2022-12-04</td>
-                        <td>2022-12-11 까지</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <section class="pre_rental">
-        <div class="container">
-            <h3 class="table-name">나의 물품 대여 내역</h3>
-            <table class="rental-table">
-                <colgroup>
-                    <col style="width: 5%;" span="1">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>물품명</th>
-                        <th>대여일</th>
-                        <th>반납일</th>
-                        <th>연체 여부</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>공학용 계산기</td>
-                        <td>2022-11-18</td>
-                        <td>2022-11-20</td>
-                        <td>정상 반납</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>보조 배터리</td>
-                        <td>2022-11-18</td>
-                        <td>2022-12-01</td>
-                        <td>연체</td>                        
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>우산</td>
-                        <td>2022-12-01</td>
-                        <td>2022-12-03</td>
-                        <td>정상 반납</td>
-                    </tr>
+                <?php endwhile; ?>
                 </tbody>
             </table>
         </div>
@@ -144,3 +103,5 @@
         </div>
     </footer>
 </body>
+
+</html>
