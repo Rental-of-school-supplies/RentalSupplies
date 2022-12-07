@@ -135,11 +135,21 @@ body {
 .title_input {
     margin-right: 2%;
     width: 45%;
-<<<<<<< HEAD
     height: 50px;
-=======
-    height: 40px;
     font-size: 20px;
+}
+
+.btn_confirm {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    background-color: #4568DC;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
 }
 
 .product_quantity {
@@ -148,14 +158,14 @@ body {
 
 .quantity_text {
     font-size: 20px;
+    font-weight: bold;
     margin-right: 3%;
-	font-weight: bold;
 }
 
 .quantity_input {
-    margin-right: 2%;
+    margin-right: 3%;
     width: 45%;
-    height: 40px;
+    height: 50px;
     font-size: 20px;
 }
 
@@ -165,42 +175,49 @@ body {
 
 .explanation_text {
     font-size: 20px;
+    font-weight: bold;
     margin-right: 3%;
-	font-weight: bold;
 }
 
 .explanation_input {
-    margin-right: 2%;
+    margin-right: 3%;
     width: 45%;
-    height: 40px;
->>>>>>> c83664d9316ca14b6f893885f4c6ab2e0ffc4d60
+    height: 50px;
     font-size: 20px;
 }
 
-.check_text {
-    text-decoration: underline;
-    text-underline-position: under;
-    font-size: 18px;
-    margin-left: 80px;
-    margin-top: 1%;
+.product_reason {
+    margin-bottom: 2%;
 }
 
-.content_text {
+.reason_text {
     font-size: 20px;
     font-weight: bold;
     margin-right: 3%;
-    vertical-align: top;
 }
 
-.content_input {
+.reason_input {
+    margin-right: 3%;
     width: 45%;
-    height: 200px;
+    height: 50px;
     font-size: 20px;
-    resize: none;
+}
+
+.category {
+    margin-bottom: 2%;
+}
+
+.drop_down {
+    font-size: 20px;
+    font-weight: bold;
     margin-right: 3%;
 }
 
-.btn_confirm {
+.attach_file {
+    margin-bottom: 2%;
+}
+
+.btn_submit {
     display: block;
     margin: auto;
     margin-top: 20px;

@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <title>product_req</title>
-    <link rel="stylesheet" href="../css/product_req.css" type="text/css">
+    <title>Rental-Of-school-supplies</title>
+    <link rel="stylesheet" href="../css/singIn_Up.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -15,6 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../jquery-fadethis-master/libs/jquery/jquery.js"></script>
     <script src="../jquery-fadethis-master/dist/jquery.fadethis.min.js"></script>
+
 </head>
 
 <body>
@@ -34,50 +35,53 @@
         <ul>
             <li><a href="#">물품 목록</a></li>
             <li><a href="#">물품 신청</a></li>
-            <li><a href="#">물품 관리</a></li>
+            <li><a href="#">찾아오시는 길</a></li>
             <li><a href="#">팀 소개</a></li>
         </ul>
     </nav>
-    
-    <section class="product_req">
-        <div class="container">
-            <div class="inner">
-                <div class="product_name">
-                    <label class="title_text" for="title">신청할 물품 이름</label>
-                    <input class="title_input" type="text" name="title" maxlength="100" required="required"
-                        pattern=".{4,100}">
-                    <button class="btn_confirm" type="submit" style="display: inline-block;">확인</button>
-                    <p class="check_text">물품 명을 입력한 후 확인 버튼을 꼭 눌러주세요!</p>
-                </div>
 
-                <label class="content_text">신청사유</label>
-                <textarea class="content_input" name="content" cols="70" rows="5"></textarea>
-                <button class="btn_confirm" type="submit">제출하기</button>
-
+    <!-- 로그인 및 회원가입 -->
+    <div class="container">
+        <div class="content_box">
+            <div class="sign-in-container">
+                <h1>SIGN IN</h1> <!-- 로그인 -->
+                <form action="../php/login.php" , method="post">
+                    <div class="radio_group">
+                        <label class="form_radio"><input type="radio" class="roleRadio" id="generalMember" name="role"
+                                value="generalMember" ondblclick="this.checked=false"> 학생</label>
+                        <label class="form_radio" style="margin-left: 10%;"><input type="radio" class="roleRadio" id="manager" name="role"
+                                value="manager" ondblclick="this.checked=false"> 관리자</label>
+                    </div>
+                    <label class="form_label">학번</label>
+                    <input class="form_input" type="text" name="studentID" id="studentID"><br>
+                    <label class="form_label" style="margin-top: 10%;">Password</label>
+                    <input class="form_input" type="password" name="password" id="password"><br>
+                    <button class="form_btn" style="margin-top: 36%;" name="signIn">Sign In</button>
+                </form>
             </div>
 
-        </div>
-    </section>
+            <div class="sign-up-container">
+                <h1>SIGN UP</h1> <!-- 회원가입 -->
+                <form action="../php/signup.php" , method="post">
+                    <label class="form_label">학번</label>
+                    <input class="form_input" type="text" name="studentID" id="studentID"><br>
 
-    <section class="product_req">
-        <div class="container">
-            <div class="inner">
-                <div class="product_name">
-                    <label class="title_text" for="title">신청할 물품 이름</label>
-                    <input class="title_input" type="text" name="title" maxlength="100" required="required"
-                        pattern=".{4,100}">
-                    <button class="btn_confirm" type="submit" style="display: inline-block;">확인</button>
-                    <p class="check_text">물품 명을 입력한 후 확인 버튼을 꼭 눌러주세요!</p>
-                </div>
+                    <label class="form_label">이름</label>
+                    <input class="form_input" type="text" name="name" id="name"><br>
 
-                <label class="content_text">신청사유</label>
-                <textarea class="content_input" name="content" cols="70" rows="5"></textarea>
-                <button class="btn_confirm" type="submit">제출하기</button>
+                    <label class="form_label">Password</label>
+                    <input class="form_input" type="password" name="password" id="password"><br>
 
+                    <label class="form_label">Phone</label>
+                    <input class="form_input" type="text" name="phone" id="phone"><br>
+
+                    <label class="form_label">Email</label>
+                    <input class="form_input" type="email" name="email" id="email"><br>
+                    <button class="form_btn" name="signUp">Sign Up</button>
+                </form>
             </div>
-
         </div>
-    </section>
+    </div>
 
     <!-- footer -->
     <footer class="site-footer">

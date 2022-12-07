@@ -18,7 +18,6 @@
 </head>
 
 <body>
-    <?php session_start(); ?>
     <?php require_once '../php/process.php'; ?>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
@@ -42,7 +41,7 @@
     </nav>
     <?php
     $mysqli = new mysqli('localhost:3306', 'root', '010510', '3idiots') or die(mysqli_error($mysqli));
-    $result = $mysqli->query("SELECT * FROM requestion") or die($mysqli->error);
+    $result = $mysqli->query("SELECT * FROM requisition") or die($mysqli->error);
     ?>
     <section class="product_req">
         <div class="container">

@@ -19,7 +19,6 @@
 </head>
 
 <body>
-    <?php session_start(); ?>
     <?php require_once '../php/process.php'; ?>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">

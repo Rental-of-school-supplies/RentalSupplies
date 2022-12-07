@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <title>product_req</title>
-    <link rel="stylesheet" href="../css/product_req.css" type="text/css">
+    <title>Rental-Of-school-supplies</title>
+    <link rel="stylesheet" href="../css/team_intro.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -38,46 +38,42 @@
             <li><a href="#">팀 소개</a></li>
         </ul>
     </nav>
-    
-    <section class="product_req">
-        <div class="container">
-            <div class="inner">
-                <div class="product_name">
-                    <label class="title_text" for="title">신청할 물품 이름</label>
-                    <input class="title_input" type="text" name="title" maxlength="100" required="required"
-                        pattern=".{4,100}">
-                    <button class="btn_confirm" type="submit" style="display: inline-block;">확인</button>
-                    <p class="check_text">물품 명을 입력한 후 확인 버튼을 꼭 눌러주세요!</p>
+
+    <div class="container">
+        <div>
+            <p class="head-title">팀 소개</p>
+        </div>
+
+        <hr style="border: 0.7px solid black; width: 90%;">
+
+        <div>
+            <div class="team_member_list">
+                <div class="team_member">
+                    <img class="team-img" src="../src/패티.png" style="width: 210px; height:250px;">
+                    <p class="member-name">이진영</p>
+                    <p class="member-title">Team Leader</p>
+                    <p class="member-role">ERD Designer<br>Front/Back-End </p>
+                </div>
+                
+                <div class="team_member">
+                    <img class="team-img" src="../src/뽀로로.png" style="width: 210px; height:250px;">
+                    <p class="member-name">정채린</p>
+                    <p class="member-title">Team Member</p>
+                    <p class="member-role">WEB Designer<br>Front/Back-End </p>
                 </div>
 
-                <label class="content_text">신청사유</label>
-                <textarea class="content_input" name="content" cols="70" rows="5"></textarea>
-                <button class="btn_confirm" type="submit">제출하기</button>
-
-            </div>
-
-        </div>
-    </section>
-
-    <section class="product_req">
-        <div class="container">
-            <div class="inner">
-                <div class="product_name">
-                    <label class="title_text" for="title">신청할 물품 이름</label>
-                    <input class="title_input" type="text" name="title" maxlength="100" required="required"
-                        pattern=".{4,100}">
-                    <button class="btn_confirm" type="submit" style="display: inline-block;">확인</button>
-                    <p class="check_text">물품 명을 입력한 후 확인 버튼을 꼭 눌러주세요!</p>
+                <div class="team_member">
+                    <img class="team-img" src="../src/루피.png" style="width: 210px; height:250px;">
+                    <p class="member-name">백우정</p>
+                    <p class="member-title">Team Member</p>
+                    <p class="member-role">ERD Designer<br>Front/Back-End </p>
                 </div>
-
-                <label class="content_text">신청사유</label>
-                <textarea class="content_input" name="content" cols="70" rows="5"></textarea>
-                <button class="btn_confirm" type="submit">제출하기</button>
-
             </div>
-
         </div>
-    </section>
+
+
+    </div>
+
 
     <!-- footer -->
     <footer class="site-footer">
