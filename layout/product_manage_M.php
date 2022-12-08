@@ -58,13 +58,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="radio" id="1" name="1" value="1" ondblclick="this.checked=false"></td>
+                        <td><input type="hidden" id="1" name="id" value="1"></td>
                         <td>보조 배터리</td>
                         <td>3</td>
                         <td>3</td>
                     </tr>
                     <tr>
-                        <td><input type="radio" id="2" name="2" value="2" ondblclick="this.checked=false"></td>
+                    <td><input type="hidden" id="1" name="id" value="1"></td>
                         <td>담요</td>
                         <td>10</td>
                         <td>6</td>
