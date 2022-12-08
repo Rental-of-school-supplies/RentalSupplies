@@ -1,5 +1,9 @@
+
 <!DOCTYPE html>
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    include('../php/db.php');    
+?>
 <html>
 
 <head>
@@ -28,7 +32,7 @@
     <div class="sub_title">
         <ul>
             <?php 
-                if($_SESSION['isSuccessLogin']){ //로그인 성공시 -> 로그아웃 출현 
+                if($_SESSION['isSuccessLogin']){ 
                     echo '<li><a href="../php/logout.php">log out</a></li> 
                             <li><a href="./mypage.php">my page</a></li>';
                 }else{
@@ -47,103 +51,91 @@
         </ul>
     </nav>
 
+    <!-- 
+        1. GET 요청으로 데이터 조회하기
+        2. 반납 / 대여 버튼을 누르면, POST 요청으로 데이터 보내기 
+                + table 위치도 변경되어야 함 
+
+     -->
     <section>
         <div class="container">
-            <div class="product_list">
+            <?php 
+                $resultRental = $db->query("
+                select rental.rentalid as 대여id, product.pid as 물품id, product.p_name as 대여물품, rental.sid as 빌린학생, rental.return_date as 반납일  
+                from manager, manages, product, rental 
+                where manager.mid = manages.mid 
+                and manages.cid = product.cid and manages.pid = product.pid 
+                and product.cid = rental.cid and product.pid = rental.pid
+                order by product.pid, rental.return_date;
+                    ") or die($db->error);
+
+                // $resultReserve = $db->query("
+                //     select product.p_name as 대기물품, reservation.sid as 대기학생, reservation.reserve_date as 대기일  
+                //     from manager, manages, product, reservation 
+                //     where manager.mid = manages.mid 
+                //     and manages.cid = product.cid and manages.pid = product.pid 
+                //     and product.cid = reservation.cid and product.pid = reservation.pid;
+                //     ") or die($db->error);
+
+                $productIndex = 0;
+                $rowIndex = 0;
+                $pastProductId = 0;
+                $currentProductId = 0;
+                $isJump = false;
+                while($rowRental=$resultRental->fetch_assoc()):
+                // while($rowReserve=$resultReserve->fetch_assoc()):
+            ?>
+
+
+            <?php
+                if($rowIndex != 0){  //$index: 물품 분류하기 위해서 사용(조회되는 table의 row에서 어디부터 어디까지가 A물품이고, B물품인지 등을 구분하고자)  
+                    $pastProductId = $currentProductId;
+                }
+                $currentProductId = $rowRental['물품id']; 
+            ?>
+
+            <?php if($pastProductId == $currentProductId ): ?> <!-- 대여물품이 같은 경우 -->
+                <tr>
+                    <td><?php echo $rowRental['빌린학생'] ?></td>
+                    <td><?php echo $rowRental['반납일'] ?></td>
+                    <td><button class="btn-rent" type="submit">반납</button></td>
+                </tr>
+            
+            <?php else:  // 대여물품이 달라지는 경우 => 1. product_List 추가로, 즉 다음 행으로 이동하는 경우 2. 현재 행에 존재하는 경우 
+                if($rowIndex != 0){
+                    echo "</tbody></table></div>";  // <div class="product">의 짝꿍
+                    
+
+                    // Case 1.
+                    if($productIndex%3 == 2){
+                        $isJump = true;
+                        echo '</div><div class="product_list">';
+                    }else{   // Case2.
+                        $isJump = false;
+                    }
+                    $productIndex++;
+                }else{  // $rowIndex == 0인 경우 (첫 행인 경우)
+                    echo '<div class="product_list">';    
+                }
+            ?>
+                    <!-- reserve-table 관련 코드 -->
                 <div class="product">
-                    <h3 class="table-name">보조 배터리</h3>
+                    <?php $productName = $rowRental['대여물품']; ?>
+                    <h3><?php echo $productName ?></h3>
                     <table class="rental-table">
                         <tbody>
                             <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-03</td>
+                                <td><?php echo $rowRental['빌린학생'] ?></td>
+                                <td><?php echo $rowRental['반납일'] ?></td>
                                 <td><button class="btn-rent" type="submit">반납</button></td>
                             </tr>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-04</td>
-                                <td><button class="btn-rent" type="submit">반납</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="reserve-table">
-                        <tbody>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-03</td>
-                                <td><button class="btn-reserve" type="submit">대여</button></td>
-                            </tr>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-04</td>
-                                <td><button class="btn-reserve" type="submit">대여</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="product">
-                    <h3 class="table-name">우산</h3>
-                    <table class="rental-table">
-                        <tbody>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-03</td>
-                                <td><button class="btn-rent" type="submit">반납</button></td>
-                            </tr>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-04</td>
-                                <td><button class="btn-rent" type="submit">반납</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="reserve-table">
-                        <tbody>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-03</td>
-                                <td><button class="btn-reserve" type="submit">대여</button></td>
-                            </tr>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-04</td>
-                                <td><button class="btn-reserve" type="submit">대여</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="product">
-                    <h3 class="table-name">담요</h3>
-                    <table class="rental-table">
-                        <tbody>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-03</td>
-                                <td><button class="btn-rent" type="submit">반납</button></td>
-                            </tr>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-04</td>
-                                <td><button class="btn-rent" type="submit">반납</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="reserve-table">
-                        <tbody>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-03</td>
-                                <td><button class="btn-reserve" type="submit">대여</button></td>
-                            </tr>
-                            <tr>
-                                <td>2020039022</td>
-                                <td>2022-12-04</td>
-                                <td><button class="btn-reserve" type="submit">대여</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
+            <?php ?>    
+            <?php endif; ?>
+            <?php $rowIndex++; ?>
+            <?php endwhile; ?>
+            <?php echo "</tbody></table></div></div>"; ?> <!-- 맨 마지막 <div class="product_list"> 짝꿍 -->
+            
         </div>
     </section>
 
