@@ -44,6 +44,7 @@
     <section class="current_product">
         <div class="container">
             <h3 class="table-name">물품 리스트</h3>
+            <button id="insertButton" style="margin-left: 100px;">물품 추가하기</button>
             <table class="product-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
