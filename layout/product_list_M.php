@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <?php 
     session_start(); 
@@ -60,82 +59,106 @@
     <section>
         <div class="container">
             <?php 
+                // DB 연동
+
+                // view 생성 
+                // Q. 페이지가 업데이트 될 때마다 drop view 안 해줘도 돼나? A. 해줘야 함            
                 $resultRental = $db->query("
-                select rental.rentalid as 대여id, product.pid as 물품id, product.p_name as 대여물품, rental.sid as 빌린학생, rental.return_date as 반납일  
-                from manager, manages, product, rental 
-                where manager.mid = manages.mid 
-                and manages.cid = product.cid and manages.pid = product.pid 
-                and product.cid = rental.cid and product.pid = rental.pid
-                order by product.pid, rental.return_date;
+                    CREATE OR REPLACE VIEW rentalView 
+                    as select rental.rentalid as 대여id, product.pid as 물품id, product.p_name as 대여물품, rental.sid as 빌린학생, rental.return_date as 반납일  
+                    from manager, manages, product, rental 
+                    where manager.mid = manages.mid 
+                    and manages.cid = product.cid and manages.pid = product.pid 
+                    and product.cid = rental.cid and product.pid = rental.pid
+                    order by product.pid, rental.return_date;
+                    ") or die($db->error);
+                
+
+                $resultReserve = $db->query("
+                    CREATE OR REPLACE VIEW reserveView
+                    as select reservation.reserveid as 예약id, product.pid as 물품id, product.p_name as 대기물품, reservation.sid as 대기학생, reservation.reserve_date as 대기일  
+                    from manager, manages, product, reservation 
+                    where manager.mid = manages.mid 
+                    and manages.cid = product.cid and manages.pid = product.pid 
+                    and product.cid = reservation.cid and product.pid = reservation.pid
+                    order by product.pid, reservation.reserve_date;
                     ") or die($db->error);
 
-                // $resultReserve = $db->query("
-                //     select product.p_name as 대기물품, reservation.sid as 대기학생, reservation.reserve_date as 대기일  
-                //     from manager, manages, product, reservation 
-                //     where manager.mid = manages.mid 
-                //     and manages.cid = product.cid and manages.pid = product.pid 
-                //     and product.cid = reservation.cid and product.pid = reservation.pid;
-                //     ") or die($db->error);
 
-                $productIndex = 0;
-                $rowIndex = 0;
-                $pastProductId = 0;
-                $currentProductId = 0;
-                $isJump = false;
-                while($rowRental=$resultRental->fetch_assoc()):
-                // while($rowReserve=$resultReserve->fetch_assoc()):
-            ?>
+                $idxOfProductList = 0;
+                $idxOfProduct = 1;
+                $isEmpty = false;   
 
+                $totalNumProduct = $db->query("select pid from product order by pid desc limit 1;") or die($db->error);
+                $totalNumProduct = $totalNumProduct->fetch_assoc();
+                while(!$isEmpty):    // product_list 반복문 
+                    echo '<div class="product_list">';
 
-            <?php
-                if($rowIndex != 0){  //$index: 물품 분류하기 위해서 사용(조회되는 table의 row에서 어디부터 어디까지가 A물품이고, B물품인지 등을 구분하고자)  
-                    $pastProductId = $currentProductId;
-                }
-                $currentProductId = $rowRental['물품id']; 
-            ?>
+                    for($cntRental = 0; $cntRental % 4 != 3; ): // product 반복문 => $idxOfProduct = RentalTable의 PID = ReservationTable의 PID와 동일
+                        
+                        if($totalNumProduct['pid'] < $idxOfProduct){
+                            $isEmpty = true;
+                            break;
+                        }
 
-            <?php if($pastProductId == $currentProductId ): ?> <!-- 대여물품이 같은 경우 -->
-                <tr>
-                    <td><?php echo $rowRental['빌린학생'] ?></td>
-                    <td><?php echo $rowRental['반납일'] ?></td>
-                    <td><button class="btn-rent" type="submit">반납</button></td>
-                </tr>
-            
-            <?php else:  // 대여물품이 달라지는 경우 => 1. product_List 추가로, 즉 다음 행으로 이동하는 경우 2. 현재 행에 존재하는 경우 
-                if($rowIndex != 0){
-                    echo "</tbody></table></div>";  // <div class="product">의 짝꿍
-                    
+                        // 해당 인덱스에 해당하는 물품id가 존재확인 여부
+                        $isExsistsProductId = $db->query("
+                            select exists(
+                                select 1
+                                from product
+                                where pid = '$idxOfProduct'
+                            ) as cnt;
+                        ") or die($db->error);
+                        $isExsistsProductId = $isExsistsProductId->fetch_assoc();
+                        if($isExsistsProductId['cnt'] == 0 ){
+                            $cntRental ++;
+                        }else{
+                            $idxOfProduct++;
+                            continue;
+                        }
 
-                    // Case 1.
-                    if($productIndex%3 == 2){
-                        $isJump = true;
-                        echo '</div><div class="product_list">';
-                    }else{   // Case2.
-                        $isJump = false;
-                    }
-                    $productIndex++;
-                }else{  // $rowIndex == 0인 경우 (첫 행인 경우)
-                    echo '<div class="product_list">';    
-                }
-            ?>
-                    <!-- reserve-table 관련 코드 -->
-                <div class="product">
-                    <?php $productName = $rowRental['대여물품']; ?>
-                    <h3><?php echo $productName ?></h3>
-                    <table class="rental-table">
-                        <tbody>
-                            <tr>
-                                <td><?php echo $rowRental['빌린학생'] ?></td>
-                                <td><?php echo $rowRental['반납일'] ?></td>
-                                <td><button class="btn-rent" type="submit">반납</button></td>
-                            </tr>
+                        echo "<div class='product'>";
+                        $productName = $rowRental['대여물품'];
+                        echo "<h3>".$productName."</h3>";
+                        $resultRental = $db->query("select * from rentalView where 물품id = $idxOfProduct ");
+                        $resultReserve = $db->query("select * from reserveView where 물품id = $idxOfProduct ");
 
-            <?php ?>    
-            <?php endif; ?>
-            <?php $rowIndex++; ?>
-            <?php endwhile; ?>
-            <?php echo "</tbody></table></div></div>"; ?> <!-- 맨 마지막 <div class="product_list"> 짝꿍 -->
-            
+                        $idxOfRentalTable = 0;
+                        while($rowRental=$resultRental->fetch_assoc()):   //rental table 반복문 
+                            if($idxOfRentalTable == 0){
+                                echo "<table class='rental-table'><tbody>";  
+                            }
+                            echo   "<tr>
+                                        <td>".$rowRental['빌린학생']."</td>
+                                        <td>". $rowRental['반납일']."</td>
+                                        <td><button class='btn-rent' type='submit'>반납</button></td>
+                                    </tr>";
+
+                            $idxOfRentalTable++;
+                        endwhile;
+                        echo "</tbody></table>";
+
+                        $idxOfReservationTable = 0;
+                        while($rowReserve=$resultReserve->fetch_assoc()):    //reservation table 반복문
+                            if($idxOfReservationTable == 0){
+                                echo "<table class='reserve-table'><tbody>";  
+                            }
+                            echo   "<tr>
+                                        <td>".$rowReserve['대기학생']."</td>
+                                        <td>".$rowReserve['대기일']."</td>
+                                        <td><button class='btn-reserve' type='submit'>대기</button></td>
+                                    </tr>";
+
+                            $idxOfReservationTable++;
+                        endwhile;
+                        echo "</tbody></table>";
+
+                    endfor;
+                    echo "</div>";
+
+                endwhile;
+                echo "</div>";
+            ?>            
         </div>
     </section>
 
