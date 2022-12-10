@@ -58,9 +58,8 @@
      -->
     <section>
         <div class="container">
-            <?php 
-                // DB 연동
-
+            <?php // DB 연동
+                
                 // view 생성 
                 // Q. 페이지가 업데이트 될 때마다 drop view 안 해줘도 돼나? A. 해줘야 함            
                 $resultRental = $db->query("
@@ -85,43 +84,53 @@
                     ") or die($db->error);
 
 
-                $idxOfProductList = 0;
-                $idxOfProduct = 1;
-                $isEmpty = false;   
+                // $idxOfProductList = 0;
+                $currentSelectPID = 1;  //물품 id인 pid는 1부터 시작함
+                $isEmptyProductTable = false;   
+                
+                $select_query = $db->query("select pid from product order by pid desc limit 1;") or die($db->error);
+                $result = $select_query->fetch_assoc();
+                $lastPID = $result['pid'];
 
-                $totalNumProduct = $db->query("select pid from product order by pid desc limit 1;") or die($db->error);
-                $totalNumProduct = $totalNumProduct->fetch_assoc();
-                while(!$isEmpty):    // product_list 반복문 
+                while(true):    // product_list 반복문 
                     echo '<div class="product_list">';
 
-                    for($cntRental = 0; $cntRental % 4 != 3; ): // product 반복문 => $idxOfProduct = RentalTable의 PID = ReservationTable의 PID와 동일
+                    // $cntRental :  class Product의 개수가 4개이상부터는 class Product_List가 시작되도록 정보를 제공하는 변수 
+                    for($cntRental = 0; $cntRental <= 2; ): // product 반복문 => $currentSelectPID = RentalTable의 PID = ReservationTable의 PID와 동일
                         
-                        if($totalNumProduct['pid'] < $idxOfProduct){
-                            $isEmpty = true;
+                        if($lastPID < $currentSelectPID){
+                            $isEmptyProductTable = true;
                             break;
                         }
 
                         // 해당 인덱스에 해당하는 물품id가 존재확인 여부
-                        $isExsistsProductId = $db->query("
+                        $isExsistsProductId_query = $db->query("
                             select exists(
                                 select 1
                                 from product
-                                where pid = '$idxOfProduct'
+                                where pid = '$currentSelectPID'
                             ) as cnt;
                         ") or die($db->error);
-                        $isExsistsProductId = $isExsistsProductId->fetch_assoc();
-                        if($isExsistsProductId['cnt'] == 0 ){
-                            $cntRental ++;
-                        }else{
-                            $idxOfProduct++;
+                        $result = $isExsistsProductId_query->fetch_assoc();
+                        $isExsistsProductId = $result['cnt'];
+                        if($isExsistsProductId == "0"){  //해당 물품 존재X
+                            $currentSelectPID++;
                             continue;
+                        }else{  // 존재
+                            // var_dump($isExsistsProductId);
+                            // echo "no"; 
+                            $currentSelectPID++;
+                            $cntRental ++;
                         }
 
                         echo "<div class='product'>";
-                        $productName = $rowRental['대여물품'];
+                        $select_query = $db -> query("select P_Name from product where pid = $currentSelectPID") or die($db->error);
+                        $result = $select_query->fetch_assoc();
+                        $productName = $result['P_Name'];
                         echo "<h3>".$productName."</h3>";
-                        $resultRental = $db->query("select * from rentalView where 물품id = $idxOfProduct ");
-                        $resultReserve = $db->query("select * from reserveView where 물품id = $idxOfProduct ");
+
+                        $resultRental = $db->query("select * from rentalView where 물품id = $currentSelectPID");
+                        $resultReserve = $db->query("select * from reserveView where 물품id = $currentSelectPID");
 
                         $idxOfRentalTable = 0;
                         while($rowRental=$resultRental->fetch_assoc()):   //rental table 반복문 
@@ -130,7 +139,7 @@
                             }
                             echo   "<tr>
                                         <td>".$rowRental['빌린학생']."</td>
-                                        <td>". $rowRental['반납일']."</td>
+                                        <td>".$rowRental['반납일']."</td>
                                         <td><button class='btn-rent' type='submit'>반납</button></td>
                                     </tr>";
 
@@ -153,13 +162,18 @@
                         endwhile;
                         echo "</tbody></table>";
 
+                    echo "</div>";
                     endfor;
                     echo "</div>";
+                    
+                    if($isEmptyProductTable == "1"){
+                        break;
+                    }
 
                 endwhile;
                 echo "</div>";
             ?>            
-        </div>
+        </div>  <!-- container 끝 -->
     </section>
 
     <!-- footer -->
