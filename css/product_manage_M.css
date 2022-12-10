@@ -117,39 +117,22 @@ body {
 }
 
 /*main*/
+#insertButton{
+    display: block;
+    margin: auto;
+    margin-top: 35px;
+    text-align: center;
+    background-color: #4568DC;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
 .current_product {
     margin-bottom: 7%;
 }
-#deleteButton{
-    position: absolute;
-    width: 161px;
-    height: 48px;
-    left: 926px;
-    top: 400px;
-    
-    font-size: large;
 
-    border: 0;
-    outline: 0;
-
-    background: #4568DC;
-    color:white;
-}
-#insertButton{
-    position: absolute;
-    width: 161px;
-    height: 48px;
-    left: 1109px;
-    top: 400px;
-
-    font-size: large;
-    
-    border: 0;
-    outline: 0;
-
-    background: #4568DC;
-    color:white;
-}
 .table-name {
     text-align: left;
     font-size: 22px;

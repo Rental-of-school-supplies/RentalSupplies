@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<?php session_start();?>
 <html>
 
 <head>
-    <title>product_req</title>
-    <link rel="stylesheet" href="../css/product_req.css" type="text/css">
+    <title>product_req_M</title>
+    <link rel="stylesheet" href="../css/product_manage_M.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -11,6 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../jquery-fadethis-master/libs/jquery/jquery.js"></script>
@@ -32,50 +34,50 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="product_list_All.html">물품 목록</a></li>
-            <li><a href="product_req.html">물품 신청</a></li>
-            <li><a href="location.html">찾아오시는 길</a></li>
-            <li><a href="team_intro.html">팀 소개</a></li>
+            <li><a href="#">물품 목록</a></li>
+            <li><a href="#">물품 신청</a></li>
+            <li><a href="#">물품 관리</a></li>
+            <li><a href="#">팀 소개</a></li>
         </ul>
     </nav>
-    
-    <section class="product_req">
+
+    <section class="current_product">
         <div class="container">
-            <div class="inner">
-                <div class="product_name">
-                    <label class="title_text" for="title">신청할 물품 이름</label>
-                    <input class="title_input" type="text" name="title" maxlength="100" required="required"
-                        pattern=".{4,100}">
-                    <button class="btn_confirm" type="submit" style="display: inline-block;">확인</button>
-                    <p class="check_text">물품 명을 입력한 후 확인 버튼을 꼭 눌러주세요!</p>
-                </div>
-
-                <label class="content_text">신청사유</label>
-                <textarea class="content_input" name="content" cols="70" rows="5"></textarea>
-                <button class="btn_confirm" type="submit">제출하기</button>
-
-            </div>
-
-        </div>
-    </section>
-
-    <section class="product_req">
-        <div class="container">
-            <div class="inner">
-                <div class="product_name">
-                    <label class="title_text" for="title">신청할 물품 이름</label>
-                    <input class="title_input" type="text" name="title" maxlength="100" required="required"
-                        pattern=".{4,100}">
-                    <button class="btn_confirm" type="submit" style="display: inline-block;">확인</button>
-                    <p class="check_text">물품 명을 입력한 후 확인 버튼을 꼭 눌러주세요!</p>
-                </div>
-
-                <label class="content_text">신청사유</label>
-                <textarea class="content_input" name="content" cols="70" rows="5"></textarea>
-                <button class="btn_confirm" type="submit">제출하기</button>
-
-            </div>
-
+            <h3 class="table-name">물품 리스트</h3>
+            <button id="insertButton" style="margin-left: 100px;">물품 추가하기</button>
+            <table class="product-table">
+                <colgroup>
+                    <col style="width: 5%;" span="1">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>물품명</th>
+                        <th>전체 개수</th>
+                        <th>남은 수량</th>
+                        <th>수정</th>
+                        <th>삭제</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="hidden" id="1" name="id" value="1"></td>
+                        <td>보조 배터리</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td><a href="" class="btn btn-info">EDIT </a></td>
+                        <td><a href="" class="btn btn-danger">DELETE</a></td>
+                    </tr>
+                    <tr>
+                    <td><input type="hidden" id="2" name="id" value="2"></td>
+                        <td>담요</td>
+                        <td>10</td>
+                        <td>6</td>
+                        <td><a href="" class="btn btn-info">EDIT </a></td>
+                        <td><a href="" class="btn btn-danger">DELETE</a></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
@@ -107,3 +109,7 @@
         </div>
     </footer>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+</html>
