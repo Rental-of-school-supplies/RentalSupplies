@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<?php session_start();?>
 <html>
 
 <head>
-    <title>product_req</title>
-    <link rel="stylesheet" href="../css/location.css" type="text/css">
+    <title>product_req_M</title>
+    <link rel="stylesheet" href="../css/product_manage_M.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -11,6 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../jquery-fadethis-master/libs/jquery/jquery.js"></script>
@@ -32,32 +34,53 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="product_list_All.html">물품 목록</a></li>
-            <li><a href="product_req.html">물품 신청</a></li>
-            <li><a href="location.html">찾아오시는 길</a></li>
-            <li><a href="team_intro.html">팀 소개</a></li>
-
+            <li><a href="#">물품 목록</a></li>
+            <li><a href="#">물품 신청</a></li>
+            <li><a href="#">물품 관리</a></li>
+            <li><a href="#">팀 소개</a></li>
         </ul>
     </nav>
 
-    <div class="container">
-        <div>
-            <p class="head-title">찾아오시는 길</p>
+    <section class="current_product">
+        <div class="container">
+            <h3 class="table-name">물품 리스트</h3>
+            <button id="insertButton" style="margin-left: 100px;">물품 추가하기</button>
+            <table class="product-table">
+                <colgroup>
+                    <col style="width: 5%;" span="1">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>물품명</th>
+                        <th>전체 개수</th>
+                        <th>남은 수량</th>
+                        <th>수정</th>
+                        <th>삭제</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="hidden" id="1" name="id" value="1"></td>
+                        <td>보조 배터리</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td><a href="" class="btn btn-info">EDIT </a></td>
+                        <td><a href="" class="btn btn-danger">DELETE</a></td>
+                    </tr>
+                    <tr>
+                    <td><input type="hidden" id="2" name="id" value="2"></td>
+                        <td>담요</td>
+                        <td>10</td>
+                        <td>6</td>
+                        <td><a href="" class="btn btn-info">EDIT </a></td>
+                        <td><a href="" class="btn btn-danger">DELETE</a></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </section>
 
-        <hr style="border: 0.7px solid black; width: 90%;">
-
-        <div class="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2216.0250538063087!2d127.45434338894304!3d36.626425989153724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565293695b9f291%3A0x14f446d8e1ea681f!2sS4-1%20Chungbuk%20National%20University%20Electronic%20Information%20Building%203!5e0!3m2!1sen!2skr!4v1670206427995!5m2!1sen!2skr" 
-            width="1100" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-        </div>
-
-        <div class="border-box">
-            <p class="address-title"><span class="address-title-color">소프트웨어학부</span> 학생회실</p>
-            <p class="address">충북 청주시 서원구 충대로1 충북대학교 전자정보대학 소프트웨어학부 S4-1동(전자정보 3관) 109호</p>
-        </div>
-    </div>
-       
     <!-- footer -->
     <footer class="site-footer">
         <div class="container">
@@ -86,3 +109,7 @@
         </div>
     </footer>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+</html>
