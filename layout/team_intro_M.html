@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <title>product_req_M</title>
-    <link rel="stylesheet" href="../css/product_manage_M.css" type="text/css">
+    <title>Rental-Of-school-supplies</title>
+    <link rel="stylesheet" href="../css/team_intro.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -15,13 +15,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../jquery-fadethis-master/libs/jquery/jquery.js"></script>
     <script src="../jquery-fadethis-master/dist/jquery.fadethis.min.js"></script>
-
 </head>
 
 <body>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
-        <img src="../src/logo.PNG" alt="logo" height="120px">
+        <a href="main_M.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
         <span class="title">학생회 <span>물품대여</span></span>
     </div>
     <div class="sub_title">
@@ -33,47 +32,48 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="product_list_M.html">물품 목록</a></li>
-            <li><a href="product_req_M.php">물품 신청</a></li>
-            <li><a href="product_manage_M.html">물품 관리</a></li>
+            <li><a href="product_list_All.html">물품 목록</a></li>
+            <li><a href="product_req.html">물품 신청</a></li>
+            <li><a href="location.html">찾아오시는 길</a></li>
             <li><a href="team_intro.html">팀 소개</a></li>
         </ul>
     </nav>
 
-    <section class="current_product">
-        <div class="container">
-            <h3 class="table-name">물품 리스트</h3>
-            <button id="deleteButton">물품 삭제하기</button>
-            <button id="insertButton">물품 추가하기</button>
-            <table class="product-table">
-                <colgroup>
-                    <col style="width: 5%;" span="1">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>물품명</th>
-                        <th>전체 개수</th>
-                        <th>남은 수량</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="radio" id="1" name="1" value="1" ondblclick="this.checked=false"></td>
-                        <td>보조 배터리</td>
-                        <td>3</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td><input type="radio" id="2" name="2" value="2" ondblclick="this.checked=false"></td>
-                        <td>담요</td>
-                        <td>10</td>
-                        <td>6</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="container">
+        <div>
+            <p class="head-title">팀 소개</p>
         </div>
-    </section>
+
+        <hr style="border: 0.7px solid black; width: 90%;">
+
+        <div>
+            <div class="team_member_list">
+                <div class="team_member">
+                    <img class="team-img" src="../src/패티.png" style="width: 210px; height:250px;">
+                    <p class="member-name">이진영</p>
+                    <p class="member-title">Team Leader</p>
+                    <p class="member-role">ERD Designer<br>Front/Back-End </p>
+                </div>
+                
+                <div class="team_member">
+                    <img class="team-img" src="../src/뽀로로.png" style="width: 210px; height:250px;">
+                    <p class="member-name">정채린</p>
+                    <p class="member-title">Team Member</p>
+                    <p class="member-role">WEB Designer<br>Front/Back-End </p>
+                </div>
+
+                <div class="team_member">
+                    <img class="team-img" src="../src/루피.png" style="width: 210px; height:250px;">
+                    <p class="member-name">백우정</p>
+                    <p class="member-title">Team Member</p>
+                    <p class="member-role">ERD Designer<br>Front/Back-End </p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
 
     <!-- footer -->
     <footer class="site-footer">
