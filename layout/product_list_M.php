@@ -2,6 +2,7 @@
 <?php 
     session_start(); 
     include('../php/db.php');    
+    include('../php/returnAndReserve.php');
 ?>
 <html>
 
@@ -129,8 +130,8 @@
                         $productName = $result['P_Name'];
                         echo "<h3>".$productName."</h3>";
 
-                        $resultRental = $db->query("select * from rentalView where 물품id = $currentSelectPID");
-                        $resultReserve = $db->query("select * from reserveView where 물품id = $currentSelectPID");
+                        $resultRental = $db->query("select * from rentalView where 물품id = $currentSelectPID") or die($db->error);
+                        $resultReserve = $db->query("select * from reserveView where 물품id = $currentSelectPID") or die($db->error);
 
                         $idxOfRentalTable = 0;
                         while($rowRental=$resultRental->fetch_assoc()):   //rental table 반복문 
@@ -140,7 +141,7 @@
                             echo   "<tr>
                                         <td>".$rowRental['빌린학생']."</td>
                                         <td>".$rowRental['반납일']."</td>
-                                        <td><button class='btn-rent' type='submit'>반납</button></td>
+                                        <td><button class='btn-rent' type='submit' onclick='".returnAndReserveFun($rowRental['대여id'])."'>반납</button></td>
                                     </tr>";
 
                             $idxOfRentalTable++;
@@ -155,7 +156,7 @@
                             echo   "<tr>
                                         <td>".$rowReserve['대기학생']."</td>
                                         <td>".$rowReserve['대기일']."</td>
-                                        <td><button class='btn-reserve' type='submit'>대기</button></td>
+                                        <td><button class='btn-reserve' type='submit' onclick=''>대기</button></td>
                                     </tr>";
 
                             $idxOfReservationTable++;
