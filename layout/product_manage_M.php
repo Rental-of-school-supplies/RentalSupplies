@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php session_start();?>
 <html>
 
 <head>
@@ -11,11 +12,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../jquery-fadethis-master/libs/jquery/jquery.js"></script>
     <script src="../jquery-fadethis-master/dist/jquery.fadethis.min.js"></script>
-
 </head>
 
 <body>
@@ -33,18 +34,17 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="product_list_M.html">물품 목록</a></li>
-            <li><a href="product_req_M.php">물품 신청</a></li>
-            <li><a href="product_manage_M.html">물품 관리</a></li>
-            <li><a href="team_intro.html">팀 소개</a></li>
+            <li><a href="#">물품 목록</a></li>
+            <li><a href="#">물품 신청</a></li>
+            <li><a href="#">물품 관리</a></li>
+            <li><a href="#">팀 소개</a></li>
         </ul>
     </nav>
 
     <section class="current_product">
         <div class="container">
             <h3 class="table-name">물품 리스트</h3>
-            <button id="deleteButton">물품 삭제하기</button>
-            <button id="insertButton">물품 추가하기</button>
+            <button id="insertButton" style="margin-left: 100px;">물품 추가하기</button>
             <table class="product-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
@@ -55,20 +55,26 @@
                         <th>물품명</th>
                         <th>전체 개수</th>
                         <th>남은 수량</th>
+                        <th>수정</th>
+                        <th>삭제</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="radio" id="1" name="1" value="1" ondblclick="this.checked=false"></td>
+                        <td><input type="hidden" id="1" name="id" value="1"></td>
                         <td>보조 배터리</td>
                         <td>3</td>
                         <td>3</td>
+                        <td><a href="" class="btn btn-info">EDIT </a></td>
+                        <td><a href="" class="btn btn-danger">DELETE</a></td>
                     </tr>
                     <tr>
-                        <td><input type="radio" id="2" name="2" value="2" ondblclick="this.checked=false"></td>
+                    <td><input type="hidden" id="2" name="id" value="2"></td>
                         <td>담요</td>
                         <td>10</td>
                         <td>6</td>
+                        <td><a href="" class="btn btn-info">EDIT </a></td>
+                        <td><a href="" class="btn btn-danger">DELETE</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -103,3 +109,7 @@
         </div>
     </footer>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+</html>

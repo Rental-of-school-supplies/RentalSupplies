@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <title>Rental-Of-school-supplies</title>
-    <link rel="stylesheet" href="../css/product_list.css" type="text/css">
+    <title>product_req</title>
+    <link rel="stylesheet" href="../css/product_req.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -15,7 +15,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../jquery-fadethis-master/libs/jquery/jquery.js"></script>
     <script src="../jquery-fadethis-master/dist/jquery.fadethis.min.js"></script>
-
 </head>
 
 <body>
@@ -40,46 +39,26 @@
         </ul>
     </nav>
 
-    <div class="container">
-        <nav class="navbar2">
-            <ul>
-                <li><a href="product_list_All.html">전체</a></li>
-                <li><a href="product_list_Daily.html">생필품</a></li>
-                <li><a href="product_list_elec.html">전자기기</a></li>
-                <li><a href="product_list_health.html" style="color: #4568DC;">운동기구</a></li>
-                <li><a href="product_list_stationery.html">문구</a></li>
-            </ul>
-        </nav>    
-    </div>
-
-    <section>
+    <section class="product_req">
         <div class="container">
-            <div class="product_list">
-                <div class="product">
-                    <img class="product-img"src="../src/bettery.jpeg" alt="bettery" style="width: 300px; height:200px;">
-                    <p class="product-name">보조 배터리</p>
-                    <p class="product-count">(전체 개수: 5 / 남은 수량: 3)</p>
-                    <p class="product-info">보조 배터리를 사용해 전자 기기를 충전합니다.<br>연결 단자(C타입, 아이폰, 갤럭시) 포함</p>
-                    <button class="btn-rent" type="submit">대여하기</button>
+            <div class="inner">
+                <div class="product_name">
+                    <label class="title_text" for="title">신청할 물품 이름</label>
+                    <input class="title_input" type="text" name="title" maxlength="100" required="required"
+                        pattern=".{4,100}">
+                    <button class="btn_confirm" type="submit" style="display: inline-block;">확인</button>
+                    <p class="check_text">물품 명을 입력한 후 확인 버튼을 꼭 눌러주세요!</p>
                 </div>
-                <div class="product">
-                    <img class="product-img"src="../src/umbrella.jpeg" alt="umbrella" style="width: 300px; height:200px;">
-                    <p class="product-name">우산</p>
-                    <p class="product-count">(전체 개수: 5 / 남은 수량: 3)</p>
-                    <p class="product-info">보조 배터리를 사용해 전자 기기를 충전합니다. 연결 단자(C타입, 아이폰, 갤럭시) 포함</p>
-                    <button class="btn-rent" type="submit">대여하기</button>
-                </div>
-                <div class="product">
-                    <img class="product-img"src="../src/blanket.jpeg" alt="blanket" style="width: 300px; height:200px;">
-                    <p class="product-name">담요</p>
-                    <p class="product-count">(전체 개수: 5 / 남은 수량: 3)</p>
-                    <p class="product-info">보조 배터리를 사용해 전자 기기를 충전합니다. 연결 단자(C타입, 아이폰, 갤럭시) 포함</p>
-                    <button class="btn-reserve" type="submit">예약하기</button>
-                </div>
+
+                <label class="content_text">신청사유</label>
+                <textarea class="content_input" name="content" cols="70" rows="5"></textarea>
+                <button class="btn_confirm" type="submit">제출하기</button>
+
             </div>
+
         </div>
     </section>
-    
+
     <!-- footer -->
     <footer class="site-footer">
         <div class="container">

@@ -117,10 +117,89 @@ body {
 }
 
 /*main*/
-#insertButton{
+.product_req {
+    margin: 4% 0;
+    text-align: center;
+}
+
+.product_name {
+    margin-bottom: 2%;
+}
+
+.title_text {
+    font-size: 20px;
+    margin-right: 3%;
+	font-weight: bold;
+}
+
+.title_input {
+    margin-right: 2%;
+    width: 45%;
+    height: 40px;
+    font-size: 20px;
+}
+
+.product_quantity {
+    margin-bottom: 2%;
+}
+
+.quantity_text {
+    font-size: 20px;
+    margin-right: 3%;
+	font-weight: bold;
+}
+
+.quantity_input {
+    margin-right: 2%;
+    width: 45%;
+    height: 40px;
+    font-size: 20px;
+}
+
+.product_explanation {
+    margin-bottom: 2%;
+}
+
+.explanation_text {
+    font-size: 20px;
+    margin-right: 3%;
+	font-weight: bold;
+}
+
+.explanation_input {
+    margin-right: 2%;
+    width: 45%;
+    height: 40px;
+    font-size: 20px;
+}
+
+.check_text {
+    text-decoration: underline;
+    text-underline-position: under;
+    font-size: 18px;
+    margin-left: 80px;
+    margin-top: 1%;
+}
+
+.content_text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 3%;
+    vertical-align: top;
+}
+
+.content_input {
+    width: 45%;
+    height: 200px;
+    font-size: 20px;
+    resize: none;
+    margin-right: 3%;
+}
+
+.btn_confirm {
     display: block;
     margin: auto;
-    margin-top: 35px;
+    margin-top: 20px;
     text-align: center;
     background-color: #4568DC;
     color: #fff;
@@ -128,46 +207,6 @@ body {
     font-size: 18px;
     padding: 10px 20px;
     border-radius: 5px;
-}
-.current_product {
-    margin-bottom: 7%;
-}
-.table-name {
-    text-align: left;
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 7%;
-    margin-bottom: 3%;
-}
-
-.product-table {
-    width: 100%;
-    text-align: center;
-}
-
-.product-table>thead tr th {
-    text-align: center;
-    padding: 15px 0px;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    font-size: 20px;
-}
-
-.product-table>tbody tr td {
-    padding: 15px 0px;
-    font-size: 18px;
-}
-
-tbody tr:nth-child(odd) {
-    background-color: #fff;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f5f5f5;
-}
-
-tbody tr:hover {
-    background-color: #e8e8e8;
 }
 
 /* footer design */

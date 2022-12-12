@@ -3,7 +3,7 @@
 
 <head>
     <title>product_req_M</title>
-    <link rel="stylesheet" href="../css/product_manage_M.css" type="text/css">
+    <link rel="stylesheet" href="../css/product_req_M.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -15,10 +15,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../jquery-fadethis-master/libs/jquery/jquery.js"></script>
     <script src="../jquery-fadethis-master/dist/jquery.fadethis.min.js"></script>
-
 </head>
 
 <body>
+    <?php require_once '../php/process.php'; ?>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
         <img src="../src/logo.PNG" alt="logo" height="120px">
@@ -39,13 +39,14 @@
             <li><a href="team_intro.html">팀 소개</a></li>
         </ul>
     </nav>
-
-    <section class="current_product">
+    <?php
+    $mysqli = new mysqli('localhost:3306', 'root', '010510', '3idiots') or die(mysqli_error($mysqli));
+    $result = $mysqli->query("SELECT * FROM requisition") or die($mysqli->error);
+    ?>
+    <section class="product_req">
         <div class="container">
-            <h3 class="table-name">물품 리스트</h3>
-            <button id="deleteButton">물품 삭제하기</button>
-            <button id="insertButton">물품 추가하기</button>
-            <table class="product-table">
+            <h3 class="table-name">물품 신청 내역</h3>
+            <table class="rental-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
                 </colgroup>
@@ -53,23 +54,21 @@
                     <tr>
                         <th></th>
                         <th>물품명</th>
-                        <th>전체 개수</th>
-                        <th>남은 수량</th>
+                        <th>신청 사유</th>
+                        <th>신청자</th>
+                        <th>신청일</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php while ($row = $result->fetch_assoc()):?>
                     <tr>
-                        <td><input type="radio" id="1" name="1" value="1" ondblclick="this.checked=false"></td>
-                        <td>보조 배터리</td>
-                        <td>3</td>
-                        <td>3</td>
+                        <td><?php echo $row['ReqID']; ?></td>
+                        <td><?php echo $row['Req_Pname']; ?></td>
+                        <td><?php echo $row['Req_Content']; ?></td>
+                        <td><?php echo $row['SID']; ?></td>
+                        <td><?php echo $row['Request_Date']; ?></td>
                     </tr>
-                    <tr>
-                        <td><input type="radio" id="2" name="2" value="2" ondblclick="this.checked=false"></td>
-                        <td>담요</td>
-                        <td>10</td>
-                        <td>6</td>
-                    </tr>
+                <?php endwhile; ?>
                 </tbody>
             </table>
         </div>
@@ -103,3 +102,5 @@
         </div>
     </footer>
 </body>
+
+</html>

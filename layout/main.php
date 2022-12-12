@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+    session_start(); 
+    if(!isset($_SESSION['isSuccessLogin'])){
+        $_SESSION['isSuccessLogin'] = false;
+    }
+?>
 <html>
 
 <head>
@@ -26,17 +32,23 @@
     </div>
     <div class="sub_title">
         <ul>
-            <li><a href="../layout/singIn_Up.html">sign in / sign up</a></li>
-            <li><a href="#">my page</a></li>
+            <?php 
+                if($_SESSION['isSuccessLogin']){ //로그인 성공시 -> 로그아웃 출현 
+                    echo '<li><a href="../php/logout.php">log out</a></li> 
+                            <li><a href="./mypage.php">my page</a></li>';
+                }else{
+                    echo '<li><a href="./singIn_Up.php">sign in / sign up</a></li>';
+                }  
+            ?>         
         </ul>
     </div>
 
     <nav class="navbar">
         <ul>
-            <li><a href="#">물품 목록</a></li>
-            <li><a href="#">물품 신청</a></li>
-            <li><a href="#">찾아오시는 길</a></li>
-            <li><a href="#">팀 소개</a></li>
+            <li><a href="product_list_All.html">물품 목록</a></li>
+            <li><a href="product_req.html">물품 신청</a></li>
+            <li><a href="location.html">찾아오시는 길</a></li>
+            <li><a href="team_intro.html">팀 소개</a></li>
         </ul>
     </nav>
 
