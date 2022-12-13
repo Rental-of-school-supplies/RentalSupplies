@@ -78,7 +78,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-4"><img src="../src/umbrella.jpeg" alt="umbrella" class="item_image"></div>
-                <div class="col-xs-4"><img src="../src/bettery.jpeg" alt="bettery" class="item_image"></div>
+                <div class="col-xs-4"><img src="../src/supplementaryBattery.jpeg" alt="bettery" class="item_image"></div>
                 <div class="col-xs-4"><img src="../src/blanket.jpeg" alt="blanket" class="item_image"></div>
             </div>
         </div>

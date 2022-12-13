@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php 
+    session_start(); 
+    include('../php/db.php');
+    include('../php/productrent.php'); 
+?>
 <html>
 
 <head>
@@ -33,8 +38,8 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="product_list_All.html">물품 목록</a></li>
-            <li><a href="product_req.html">물품 신청</a></li>
+            <li><a href="product_list_All.php">물품 목록</a></li>
+            <li><a href="product_req.php">물품 신청</a></li>
             <li><a href="location.html">찾아오시는 길</a></li>
             <li><a href="team_intro.html">팀 소개</a></li>
         </ul>
@@ -43,39 +48,55 @@
     <div class="container">
         <nav class="navbar2">
             <ul>
-                <li><a href="product_list_All.html">전체</a></li>
-                <li><a href="product_list_Daily.html">생필품</a></li>
-                <li><a href="product_list_elec.html" style="color: #4568DC;">전자기기</a></li>
-                <li><a href="product_list_health.html">운동기구</a></li>
-                <li><a href="product_list_stationery.html">문구</a></li>
+                <li><a href="product_list_All.php">전체</a></li>
+                <li><a href="product_list_Daily.php">생필품</a></li>
+                <li><a href="product_list_elec.php">전자기기</a></li>
+                <li><a href="product_list_health.php" style="color: #4568DC;">운동기구</a></li>
+                <li><a href="product_list_stationery.php">문구</a></li>
             </ul>
         </nav>    
     </div>
 
     <section>
         <div class="container">
-            <div class="product_list">
-                <div class="product">
-                    <img class="product-img"src="../src/bettery.jpeg" alt="bettery" style="width: 300px; height:200px;">
-                    <p class="product-name">보조 배터리</p>
-                    <p class="product-count">(전체 개수: 5 / 남은 수량: 3)</p>
-                    <p class="product-info">보조 배터리를 사용해 전자 기기를 충전합니다.<br>연결 단자(C타입, 아이폰, 갤럭시) 포함</p>
-                    <button class="btn-rent" type="submit">대여하기</button>
-                </div>
-                <div class="product">
-                    <img class="product-img"src="../src/umbrella.jpeg" alt="umbrella" style="width: 300px; height:200px;">
-                    <p class="product-name">우산</p>
-                    <p class="product-count">(전체 개수: 5 / 남은 수량: 3)</p>
-                    <p class="product-info">보조 배터리를 사용해 전자 기기를 충전합니다. 연결 단자(C타입, 아이폰, 갤럭시) 포함</p>
-                    <button class="btn-rent" type="submit">대여하기</button>
-                </div>
-                <div class="product">
-                    <img class="product-img"src="../src/blanket.jpeg" alt="blanket" style="width: 300px; height:200px;">
-                    <p class="product-name">담요</p>
-                    <p class="product-count">(전체 개수: 5 / 남은 수량: 3)</p>
-                    <p class="product-info">보조 배터리를 사용해 전자 기기를 충전합니다. 연결 단자(C타입, 아이폰, 갤럭시) 포함</p>
-                    <button class="btn-reserve" type="submit">예약하기</button>
-                </div>
+        <?php
+            $CID = 4;
+            $category_cnt = $db->query("select CID, COUNT(PID) as 해당물품수 from product where CID = $CID group by CID;");
+            $cnt_result = $category_cnt->fetch_assoc();
+
+            $select_query = $db->query("select PID from product where CID = $CID order by pid limit 1;") or die($db->error);
+            $result = $select_query->fetch_assoc();
+            $check_pid = $result['PID'];
+            $product_cnt = 1;
+
+            echo "<h4 class='product_count'>해당 물품 ".$cnt_result['해당물품수']."개</h4>";
+            echo "<div class='row'>";
+            while(true): // product 반복문
+                $select_query = $db->query("select * from product where PID = $check_pid order by pid desc limit 1;") or die($db->error);
+                $result = $select_query->fetch_assoc();
+                $avail_query = $db->query("select Left_Quantity as 남은수량 from product where pid = $check_pid") or die($db->error);
+                $availability = $avail_query->fetch_assoc();
+
+                echo "<div class='product col-md-4 col-sm-4'>
+                      <img class='product-img' src=".$result['Image_Path']." alt=".$result['P_Name']." style='width: 300px; height:200px;'>
+                      <p class='product-name'>".$result['P_Name']."</p>
+                      <p class='product-count'>(전체 개수: ".$result['Total_Quantity']." / 남은 수량: ".$result['Left_Quantity'].")</p>
+                      <p class='product-info'>".$result['Content']."</p>";
+
+                if ($availability['남은수량'] == 0) 
+                    echo "<button class='btn-reserve' type='submit' name='reserve'>예약하기</button>";
+    
+                else 
+                    echo "<button class='btn-rent' type='submit' name='rent'>대여하기</button>";
+                
+                echo "</div>"; // product div 닫음
+
+                $check_pid++;
+                if($result['PID'] != NULL) $product_cnt++;
+                if ($product_cnt > $cnt_result['해당물품수']) break;
+            endwhile;
+            echo "</div>";
+            ?> 
             </div>
         </div>
     </section>

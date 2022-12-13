@@ -122,6 +122,7 @@ body {
     /* fallback for old browsers */
     border-bottom: 2px solid black;
     margin-top: 2% !important;
+    margin-bottom: 2%;
 }
 
 .navbar2>ul {
@@ -153,15 +154,15 @@ body {
     color: #4568DC;
 }
 
-.product_list {
-    width: 100%;
-    display: flex;
+.product_count {
+    margin-bottom: 3%;
+    margin-left: 3%;
+    font-weight: bold;
+    color: #5c5b5b;
 }
 
 .product {
-    width: 33%;
-    flex: 1;
-    margin: 5% 2%;
+    margin-bottom: 5%;
 }
 
 .product-img {
