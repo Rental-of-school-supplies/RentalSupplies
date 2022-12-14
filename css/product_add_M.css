@@ -207,14 +207,35 @@ body {
     margin-bottom: 2%;
 }
 
-.drop_down {
+.category_text {
     font-size: 20px;
     font-weight: bold;
     margin-right: 3%;
 }
 
+.category-list {
+    margin-right: 3%;
+    width: 45%;
+    height: 50px;
+    font-size: 20px;
+}
+
 .attach_file {
     margin-bottom: 2%;
+}
+
+.file_text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 3%;
+}
+
+.file_input {
+    margin-right: 3%;
+    width: 45%;
+    height: 50px;
+    font-size: 20px;
+    display: inline-block !important;
 }
 
 .btn_submit {

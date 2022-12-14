@@ -27,7 +27,7 @@
 <body>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
-        <img src="../src/logo.PNG" alt="logo" height="120px">
+        <a href="main.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
         <span class="title">학생회 <span>물품대여</span></span>
     </div>
     <div class="sub_title">
@@ -45,10 +45,10 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="#">물품 목록</a></li>
-            <li><a href="#">물품 신청</a></li>
-            <li><a href="#">찾아오시는 길</a></li>
-            <li><a href="#">팀 소개</a></li>
+            <li><a href="product_list_All.html">물품 목록</a></li>
+            <li><a href="product_req.html">물품 신청</a></li>
+            <li><a href="location.html">찾아오시는 길</a></li>
+            <li><a href="team_intro.html">팀 소개</a></li>
         </ul>
     </nav>
 

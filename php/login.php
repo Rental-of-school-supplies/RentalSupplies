@@ -53,11 +53,21 @@ if (isset($_POST['signIn'])){
         $_SESSION['name'] = $row['Name'];
 
         $_SESSION['isSuccessLogin'] = true;
-        echo 
+
+        if($_SESSION['isManager']){
+          echo 
+          "<script>
+              window.alert('로그인에 성공했습니다');
+              location.replace('../layout/main_M.php');
+          </script>";
+        }else{
+          echo 
           "<script>
               window.alert('로그인에 성공했습니다');
               location.replace('../layout/main.php');
           </script>";
+        }
+        
       }else{
         echo 
           "<script>

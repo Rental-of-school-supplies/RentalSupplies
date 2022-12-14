@@ -22,7 +22,7 @@
 <body>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
-        <img src="../src/logo.PNG" alt="logo" height="120px">
+        <a href="main_M.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
         <span class="title">학생회 <span>물품대여</span></span>
     </div>
     <div class="sub_title">
@@ -44,7 +44,7 @@
     <section class="current_product">
         <div class="container">
             <h3 class="table-name">물품 리스트</h3>
-            <button id="insertButton" style="margin-left: 100px;">물품 추가하기</button>
+            <button id="insertButton">물품 추가하기</button>
             <table class="product-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
