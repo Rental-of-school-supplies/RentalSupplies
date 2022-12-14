@@ -32,7 +32,7 @@
     <div class="sub_title">
         <ul>
             <?php 
-                if($_SESSION['isSuccessLogin']){ 
+                if($_SESSION['isSuccessLogin']){ //로그인 성공시 -> 로그아웃 출현 
                     echo '<li><a href="../php/logout.php">log out</a></li> 
                             <li><a href="./mypage.php">my page</a></li>';
                 }else{
@@ -44,25 +44,17 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="#">물품 목록</a></li>
-            <li><a href="#">물품 신청</a></li>
-            <li><a href="#">물품 관리</a></li>
-            <li><a href="#">팀 소개</a></li>
+            <li><a href="product_list_M.php">물품 목록</a></li>
+            <li><a href="product_req_M.php">물품 신청</a></li>
+            <li><a href="product_manage_M.php">물품 관리</a></li>
+            <li><a href="team_intro_M.html">팀 소개</a></li>
         </ul>
     </nav>
 
-    <!-- 
-        1. GET 요청으로 데이터 조회하기
-        2. 반납 / 대여 버튼을 누르면, POST 요청으로 데이터 보내기 
-                + table 위치도 변경되어야 함 
-
-     -->
     <section>
         <div class="container">
-            <?php // DB 연동
-                
-                // view 생성 
-                // Q. 페이지가 업데이트 될 때마다 drop view 안 해줘도 돼나? A. 해줘야 함            
+            <?php 
+                        
                 $resultRental = $db->query("
                     CREATE OR REPLACE VIEW rentalView 
                     as select rental.rentalid as 대여id, product.pid as 물품id, product.p_name as 대여물품, rental.sid as 빌린학생, rental.return_date as 반납일  
@@ -92,7 +84,8 @@
                 $select_query = $db->query("select pid from product order by pid desc limit 1;") or die($db->error);
                 $result = $select_query->fetch_assoc();
                 $lastPID = $result['pid'];
-
+                
+                echo '<form action="../php/returnAndReserve.php" method="POST">';
                 while(true):    // product_list 반복문 
                     echo '<div class="product_list">';
 
@@ -139,9 +132,10 @@
                                 echo "<table class='rental-table'><tbody>";  
                             }
                             echo   "<tr>
+                                        <input type='hidden' name='id' value='".$rowRental['대여id']."'>
                                         <td>".$rowRental['빌린학생']."</td>
                                         <td>".$rowRental['반납일']."</td>
-                                        <td><button class='btn-rent' type='submit' onclick='".returnAndReserveFun($rowRental['대여id'])."'>반납</button></td>
+                                        <td><button class='btn-rent' type='submit' name = 'return'>반납</button></td>
                                     </tr>";
 
                             $idxOfRentalTable++;
@@ -156,7 +150,7 @@
                             echo   "<tr>
                                         <td>".$rowReserve['대기학생']."</td>
                                         <td>".$rowReserve['대기일']."</td>
-                                        <td><button class='btn-reserve' type='submit' onclick=''>대기</button></td>
+                                        <td><button class='btn-reserve' type='submit' name = 'stand'>대기</button></td>
                                     </tr>";
 
                             $idxOfReservationTable++;
@@ -173,6 +167,7 @@
 
                 endwhile;
                 echo "</div>";
+                // echo "</form>";
             ?>            
         </div>  <!-- container 끝 -->
     </section>
