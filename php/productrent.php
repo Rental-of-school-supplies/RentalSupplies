@@ -21,11 +21,18 @@ if(isset($_POST['reserve'])){
 }
 
 if(isset($_POST['rent'])){
-    $id=$_POST['delete'];
-    $mysqli->query("DELETE FROM data WHERE id=$id")or die($mysqli->error);
+    $category_query = $db->query("SELECT PID, CID, P_Name FROM product WHERE PID = ".$check_pid."");
+    $result = $category_query->fetch_assoc();
+    $category = $result['CID'];
+    $product = $result['PID'];
 
-    $_SESSION['message']="Record has been deleted!";
-    $_SESSION['msg_type'] ='danger';
-    header("location:index.php");
+	$db->query("INSERT INTO rental (Out_Date, Return_Date, SID, CID, PID) 
+                VALUES(now(), DATE_ADD(NOW(), INTERVAL 7 DAY), '$studentID', '$category', '$product'") or die($db->error());
+
+	echo 
+        "<script>
+            window.alert('".$catagory_query['P_Name']." 대여 성공하셨습니다.');
+            location.replace('../layout/product_list_All.php');
+        </script>";
 }
 ?>

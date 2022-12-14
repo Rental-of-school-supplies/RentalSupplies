@@ -87,7 +87,7 @@ if (isset($_POST['signUp'])){
     echo 
         "<script>
         window.alert('알 수 없는 오류가 발생했습니다');
-            location.replace('singIn_Up.html');
+            location.replace('../layout/singIn_Up.html');
         </script>";
 }
 ?>

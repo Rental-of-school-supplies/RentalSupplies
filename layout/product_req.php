@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+    if(!isset($_SESSION['isSuccessLogin'])){
+        $_SESSION['isSuccessLogin'] = false;
+    }
+    require_once('../php/productreq.php');
+?>
 <html>
 
 <head>
@@ -20,13 +26,19 @@
 <body>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
-        <img src="../src/logo.PNG" alt="logo" height="120px">
+        <a href="main.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
         <span class="title">학생회 <span>물품대여</span></span>
     </div>
     <div class="sub_title">
         <ul>
-            <li><a href="#">sign in / sign up</a></li>
-            <li><a href="#">my page</a></li>
+            <?php 
+                if($_SESSION['isSuccessLogin']){ //로그인 성공시 -> 로그아웃 출현 
+                    echo '<li><a href="../php/logout.php">log out</a></li> 
+                            <li><a href="./mypage.php">my page</a></li>';
+                }else{
+                    echo '<li><a href="./singIn_Up.php">sign in / sign up</a></li>';
+                }  
+            ?>     
         </ul>
     </div>
 
@@ -41,21 +53,18 @@
     
     <section class="product_req">
         <div class="container">
-            <div class="inner">
+            <form action="../php/productreq.php" method="POST">
                 <div class="product_name">
                     <label class="title_text" for="title">신청할 물품 이름</label>
-                    <input class="title_input" type="text" name="title" maxlength="100" required="required"
-                        pattern=".{4,100}">
-                    <button class="btn_confirm" type="submit" style="display: inline-block;">확인</button>
+                    <input class="title_input" type="text" name="title" id="title" maxlength="100" required="required"
+                           pattern=".{1,100}">
+                    <button class="btn_confirm" name="confirm" style="display: inline-block;">확인</button>
                     <p class="check_text">물품 명을 입력한 후 확인 버튼을 꼭 눌러주세요!</p>
                 </div>
-
                 <label class="content_text">신청사유</label>
-                <textarea class="content_input" name="content" cols="70" rows="5"></textarea>
-                <button class="btn_confirm" type="submit">제출하기</button>
-
-            </div>
-
+                <textarea class="content_input" name="content" id="content" cols="70" rows="5"></textarea>
+                <button class="btn_confirm" type="submit" name="save">제출하기</button>
+            </form>
         </div>
     </section>
 
