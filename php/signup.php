@@ -19,31 +19,31 @@ if (isset($_POST['signUp'])){
         echo 
             "<script>
                 window.alert('반드시 학번을 입력해주세요');
-                location.replace('../layout/singIn_Up.html');
+                location.replace('../layout/singIn_Up.php');
             </script>";
     }else if(empty($name)){
         echo 
             "<script>
                 window.alert('반드시 이름을 입력해주세요');
-                location.replace('../layout/singIn_Up.html');
+                location.replace('../layout/singIn_Up.php');
             </script>";
     }else if(empty($password)){
         echo 
             "<script>
                 window.alert('반드시 비밀번호를 입력해주세요');
-                location.replace('../layout/singIn_Up.html');
+                location.replace('../layout/singIn_Up.php');
             </script>";
     }else if(empty($phone)){
         echo 
             "<script>
                 window.alert('반드시 전화번호를 입력해주세요');
-                location.replace('../layout/singIn_Up.html');
+                location.replace('../layout/singIn_Up.php');
             </script>";
     }else if(empty($email)){
         echo 
             "<script>
                 window.alert('반드시 이메일을 입력해주세요');
-                location.replace('../layout/singIn_Up.html');
+                location.replace('../layout/singIn_Up.php');
             </script>";
     }else{ 
         
@@ -58,7 +58,7 @@ if (isset($_POST['signUp'])){
             echo 
                 "<script>
                     window.alert('학번이 이미 존재합니다');
-                    location.replace('../layout/singIn_Up.html');
+                    location.replace('../layout/singIn_Up.php');
                 </script>";
         }else{
 
@@ -71,13 +71,13 @@ if (isset($_POST['signUp'])){
                 echo 
                     "<script>
                         window.alert('회원가입에 성공했습니다');
-                        location.replace('../layout/singIn_Up.html');
+                        location.replace('../layout/singIn_Up.php');
                     </script>";
             }else{
                 echo 
                     "<script>
                         window.alert('회원가입에 실패했습니다');
-                        location.replace('../layout/singIn_Up.html');
+                        location.replace('../layout/singIn_Up.php');
                     </script>";
             }
         }
@@ -87,7 +87,7 @@ if (isset($_POST['signUp'])){
     echo 
         "<script>
         window.alert('알 수 없는 오류가 발생했습니다');
-            location.replace('singIn_Up.html');
+            location.replace('../layout/singIn_Up.php');
         </script>";
 }
 ?>
