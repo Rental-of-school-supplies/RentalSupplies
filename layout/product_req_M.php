@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php 
+    session_start(); 
+    include('../php/db.php');
+?>
 <html>
 
 <head>
@@ -18,10 +22,9 @@
 </head>
 
 <body>
-    <?php require_once '../php/process.php'; ?>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
-        <img src="../src/logo.PNG" alt="logo" height="120px">
+        <a href="main_M.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
         <span class="title">학생회 <span>물품대여</span></span>
     </div>
     <div class="sub_title">
@@ -33,15 +36,14 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="#">물품 목록</a></li>
-            <li><a href="#">물품 신청</a></li>
-            <li><a href="#">물품 관리</a></li>
-            <li><a href="#">팀 소개</a></li>
+            <li><a href="product_list_M.html">물품 목록</a></li>
+            <li><a href="product_req_M.php">물품 신청</a></li>
+            <li><a href="product_manage_M.php">물품 관리</a></li>
+            <li><a href="team_intro_M.html">팀 소개</a></li>
         </ul>
     </nav>
     <?php
-    $mysqli = new mysqli('localhost:3306', 'root', '010510', '3idiots') or die(mysqli_error($mysqli));
-    $result = $mysqli->query("SELECT * FROM requisition") or die($mysqli->error);
+    $result = $db->query("SELECT * FROM requisition") or die($mysqli->error);
     ?>
     <section class="product_req">
         <div class="container">

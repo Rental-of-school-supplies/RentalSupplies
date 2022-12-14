@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <?php 
     session_start(); 
+    include('../php/db.php');
+    include('../php/productrent.php'); 
+    
     if(!isset($_SESSION['isSuccessLogin'])){
         $_SESSION['isSuccessLogin'] = false;
     }
@@ -9,7 +12,7 @@
 
 <head>
     <title>Rental-Of-school-supplies</title>
-    <link rel="stylesheet" href="../css/main.css" type="text/css">
+    <link rel="stylesheet" href="../css/product_list.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -39,7 +42,7 @@
                 }else{
                     echo '<li><a href="./singIn_Up.php">sign in / sign up</a></li>';
                 }  
-            ?>         
+            ?>
         </ul>
     </div>
 
@@ -52,57 +55,61 @@
         </ul>
     </nav>
 
-    <section class="main_image">
+    <div class="container">
+        <nav class="navbar2">
+            <ul>
+                <li><a href="product_list_All.php" style="color: #4568DC;">전체</a></li>
+                <li><a href="product_list_Daily.php">생필품</a></li>
+                <li><a href="product_list_elec.php">전자기기</a></li>
+                <li><a href="product_list_health.php">운동기구</a></li>
+                <li><a href="product_list_stationery.php">문구</a></li>
+            </ul>
+        </nav>    
+    </div>
+
+    <section>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="intro-text">학부 생활 중
-                        <span class="intro-color">
-                            필요한 많은 물품들</span>
-                            <br>하나하나 구비하기 어려우셨나요?</p>
-                </div>
-            </div>
-        </div>
-        <div class="main_rent">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <a class="rent-text">대여하기  >></a>
-                    </div>
-                </div>
+        <?php
+            $category_cnt = $db->query("select COUNT(PID) as 해당물품수 from product;");
+            $cnt_result = $category_cnt->fetch_assoc();
+            
+            $select_query = $db->query("select PID from product order by pid limit 1;") or die($db->error());
+            $result = $select_query->fetch_assoc();
+            $check_pid = $result['PID'];
+            $product_cnt = 1;
+
+            echo "<h4 class='product_count'>해당 물품 ".$cnt_result['해당물품수']."개</h4>";
+            echo "<div class='row'>";
+            while(true): // product 반복문
+                $select_query = $db->query("select * from product where PID = $check_pid order by pid desc limit 1;") or die($db->error());
+                $result = $select_query->fetch_assoc();
+                $avail_query = $db->query("select Left_Quantity as 남은수량 from product where pid = $check_pid") or die($db->error());
+                $availability = $avail_query->fetch_assoc();
+
+                echo "<div class='product col-md-4 col-sm-4'>
+                      <img class='product-img' src=".$result['Image_Path']." alt=".$result['P_Name']." style='width: 300px; height:200px;'>
+                      <p class='product-name'>".$result['P_Name']."</p>
+                      <p class='product-count'>(전체 개수: ".$result['Total_Quantity']." / 남은 수량: ".$result['Left_Quantity'].")</p>
+                      <p class='product-info'>".$result['Content']."</p>";
+
+                if ($availability['남은수량'] == 0) 
+                    echo "<button class='btn-reserve' type='submit' name='reserve'>예약하기</button>";
+    
+                else 
+                    echo "<button class='btn-rent' type='submit' name='rent'>대여하기</button>";
+                
+                echo "</div>"; // product div 닫음
+                
+                $check_pid++;
+                if($result['PID'] != NULL) $product_cnt++;
+                if ($product_cnt > $cnt_result['해당물품수']) break;
+            endwhile;
+            echo "</div>";
+            ?> 
             </div>
         </div>
     </section>
-
-    <section class="main_item">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-4"><img src="../src/umbrella.jpeg" alt="umbrella" class="item_image"></div>
-                <div class="col-xs-4"><img src="../src/supplementaryBattery.jpeg" alt="bettery" class="item_image"></div>
-                <div class="col-xs-4"><img src="../src/blanket.jpeg" alt="blanket" class="item_image"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="main_site">
-        <div class="container" style="display: flex;">
-            <div class="site-1">
-                <img class="main_site_logo" src="../src/cbnulogo.png" alt="cbnulogo">
-                <h3>관련 사이트</h3>
-            </div>
-            <div class="site-2">
-                <ul class="site-name">
-                    <li><a href="https://www.chungbuk.ac.kr/site/www/main.do" target="_blank" rel="noopener"><img src="../src/famlogo1.png" alt="충북대학교"></a></li>
-                    <li><a href="https://eis.cbnu.ac.kr/cbnuLogin" target="_blank" rel="noopener"><img src="../src/famlogo2.png" alt="충북대학교 개신누리"></a></li>
-                    <li><a href="https://cbnu.blackboard.com/" target="_blank" rel="noopener"><img src="../src/famlogo3.png" alt="충북대학교 이러닝시스템"></a></li>
-                    <li><a href="https://cieat.cbnu.ac.kr/clientMain/a/t/main.do" target="_blank" rel="noopener"><img src="../src/famlogo4.png" alt="충북대학교 씨앗"></a></li>
-                    <li><a href="https://ece.cbu.ac.kr/" target="_blank" rel="noopener"><img src="../src/famlogo5.png" alt="충북대학교 전자정보대학"></a></li>
-                    <li><a href="https://sw7up.cbnu.ac.kr/home" target="_blank" rel="noopener"><img src="../src/famlogo6.png" alt="충북대학교 SW중심대학사업단"></a></li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- footer -->
     <footer class="site-footer">
         <div class="container">

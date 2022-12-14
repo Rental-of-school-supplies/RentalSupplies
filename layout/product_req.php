@@ -1,9 +1,15 @@
 <!DOCTYPE html>
+<?php 
+    if(!isset($_SESSION['isSuccessLogin'])){
+        $_SESSION['isSuccessLogin'] = false;
+    }
+    require_once('../php/productreq.php');
+?>
 <html>
 
 <head>
-    <title>product_req_M</title>
-    <link rel="stylesheet" href="../css/product_req_M.css" type="text/css">
+    <title>product_req</title>
+    <link rel="stylesheet" href="../css/product_req.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     </style>
@@ -15,64 +21,50 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../jquery-fadethis-master/libs/jquery/jquery.js"></script>
     <script src="../jquery-fadethis-master/dist/jquery.fadethis.min.js"></script>
-
 </head>
 
 <body>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
-        <img src="../src/logo.PNG" alt="logo" height="120px">
+        <a href="main.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
         <span class="title">학생회 <span>물품대여</span></span>
     </div>
     <div class="sub_title">
         <ul>
-            <li><a href="#">sign in / sign up</a></li>
-            <li><a href="#">my page</a></li>
+            <?php 
+                if($_SESSION['isSuccessLogin']){ //로그인 성공시 -> 로그아웃 출현 
+                    echo '<li><a href="../php/logout.php">log out</a></li> 
+                            <li><a href="./mypage.php">my page</a></li>';
+                }else{
+                    echo '<li><a href="./singIn_Up.php">sign in / sign up</a></li>';
+                }  
+            ?>     
         </ul>
     </div>
 
     <nav class="navbar">
         <ul>
-            <li><a href="#">물품 목록</a></li>
-            <li><a href="#">물품 신청</a></li>
-            <li><a href="#">물품 관리</a></li>
-            <li><a href="#">팀 소개</a></li>
+            <li><a href="product_list_All.php">물품 목록</a></li>
+            <li><a href="product_req.php">물품 신청</a></li>
+            <li><a href="location.html">찾아오시는 길</a></li>
+            <li><a href="team_intro.html">팀 소개</a></li>
         </ul>
     </nav>
-
+    
     <section class="product_req">
         <div class="container">
-            <h3 class="table-name">물품 신청 내역</h3>
-            <table class="rental-table">
-                <colgroup>
-                    <col style="width: 5%;" span="1">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>물품명</th>
-                        <th>신청 사유</th>
-                        <th>신청자</th>
-                        <th>신청일</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>보조 배터리</td>
-                        <td>보조 배터리가 너무 필요해요.. 사기는 비쌈</td>
-                        <td>2019038059</td>
-                        <td>2022-12-10</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>담요</td>
-                        <td>요즘 날씨가 너무 추워져서요</td>
-                        <td>2021041077</td>
-                        <td>2022-12-11</td>
-                    </tr>
-                </tbody>
-            </table>
+            <form action="../php/productreq.php" method="POST">
+                <div class="product_name">
+                    <label class="title_text" for="title">신청할 물품 이름</label>
+                    <input class="title_input" type="text" name="title" id="title" maxlength="100" required="required"
+                           pattern=".{1,100}">
+                    <button class="btn_confirm" name="confirm" style="display: inline-block;">확인</button>
+                    <p class="check_text">물품 명을 입력한 후 확인 버튼을 꼭 눌러주세요!</p>
+                </div>
+                <label class="content_text">신청사유</label>
+                <textarea class="content_input" name="content" id="content" cols="70" rows="5"></textarea>
+                <button class="btn_confirm" type="submit" name="save">제출하기</button>
+            </form>
         </div>
     </section>
 

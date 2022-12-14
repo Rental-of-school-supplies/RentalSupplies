@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+    session_start(); 
+    if(!isset($_SESSION['isSuccessLogin'])){
+        $_SESSION['isSuccessLogin'] = false;
+    }
+?>
 <html>
 
 <head>
@@ -21,22 +27,28 @@
 <body>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
-        <img src="../src/logo.PNG" alt="logo" height="120px">
+        <a href="main_M.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
         <span class="title">학생회 <span>물품대여</span></span>
     </div>
     <div class="sub_title">
         <ul>
-            <li><a href="../layout/singIn_Up.html">sign in / sign up</a></li>
-            <li><a href="#">my page</a></li>
+            <?php 
+                if($_SESSION['isSuccessLogin']){ //로그인 성공시 -> 로그아웃 출현 
+                    echo '<li><a href="../php/logout.php">log out</a></li> 
+                            <li><a href="./mypage.php">my page</a></li>';
+                }else{
+                    echo '<li><a href="./singIn_Up.php">sign in / sign up</a></li>';
+                }  
+            ?>         
         </ul>
     </div>
 
     <nav class="navbar">
         <ul>
-            <li><a href="#">물품 목록</a></li>
-            <li><a href="#">물품 신청</a></li>
-            <li><a href="#">찾아오시는 길</a></li>
-            <li><a href="#">팀 소개</a></li>
+            <li><a href="product_list_M.html">물품 목록</a></li>
+            <li><a href="product_req_M.php">물품 신청</a></li>
+            <li><a href="product_manage_M.php">물품 관리</a></li>
+            <li><a href="team_intro_M.html">팀 소개</a></li>
         </ul>
     </nav>
 
@@ -66,7 +78,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-4"><img src="../src/umbrella.jpeg" alt="umbrella" class="item_image"></div>
-                <div class="col-xs-4"><img src="../src/bettery.jpeg" alt="bettery" class="item_image"></div>
+                <div class="col-xs-4"><img src="../src/supplementaryBattery.jpeg" alt="bettery" class="item_image"></div>
                 <div class="col-xs-4"><img src="../src/blanket.jpeg" alt="blanket" class="item_image"></div>
             </div>
         </div>

@@ -22,7 +22,7 @@
 <body>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
-        <img src="../src/logo.PNG" alt="logo" height="120px">
+        <a href="main_M.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
         <span class="title">학생회 <span>물품대여</span></span>
     </div>
     <div class="sub_title">
@@ -34,17 +34,17 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="#">물품 목록</a></li>
-            <li><a href="#">물품 신청</a></li>
-            <li><a href="#">물품 관리</a></li>
-            <li><a href="#">팀 소개</a></li>
+            <li><a href="product_list_M.html">물품 목록</a></li>
+            <li><a href="product_req_M.php">물품 신청</a></li>
+            <li><a href="product_manage_M.php">물품 관리</a></li>
+            <li><a href="team_intro_M.html">팀 소개</a></li>
         </ul>
     </nav>
 
     <section class="current_product">
         <div class="container">
             <h3 class="table-name">물품 리스트</h3>
-            <button id="insertButton" style="margin-left: 100px;">물품 추가하기</button>
+            <button id="insertButton">물품 추가하기</button>
             <table class="product-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
