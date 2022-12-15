@@ -62,6 +62,7 @@
     <section class="current_rental">
         <div class="container">
             <h3 class="table-name">현재 대여 중인 물품</h3>
+            <h3 class="quantity">3개</h3>
             <table class="rental-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
@@ -90,6 +91,7 @@
     <section class="pre_rental">
         <div class="container">
             <h3 class="table-name">나의 물품 대여 내역</h3>
+            <h3 class="quantity">3개</h3>
             <table class="rental-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
