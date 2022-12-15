@@ -1,10 +1,11 @@
 <?php
 
+session_start();
 include('db.php');
 
 $category= 0;
 $product= 0;
-$student = 2020039002;
+$student = $_SESSION['studentID'];
 
 $delay_query = $db->query("SELECT Overdue_status AS 연체여부, Overdue_End_Date AS 종료일 FROM user WHERE SID = $student");
 $delay = $delay_query->fetch_assoc();
