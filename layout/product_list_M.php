@@ -57,7 +57,7 @@
                         
                 $resultRental = $db->query("
                     CREATE OR REPLACE VIEW rentalView 
-                    as select rental.rentalid as 대여id, product.pid as 물품id, product.p_name as 대여물품, rental.sid as 빌린학생, rental.return_date as 반납일  
+                    as select rental.rentalid as 대여id, product.pid as 물품id, product.p_name as 대여물품, rental.sid as 빌린학생, rental.in_date, rental.return_date  
                     from manager, manages, product, rental 
                     where manager.mid = manages.mid 
                     and manages.cid = product.cid and manages.pid = product.pid 
@@ -77,7 +77,6 @@
                     ") or die($db->error);
 
 
-                // $idxOfProductList = 0;
                 $currentSelectPID = 1;  //물품 id인 pid는 1부터 시작함
                 $isEmptyProductTable = false;   
                 
@@ -85,7 +84,7 @@
                 $result = $select_query->fetch_assoc();
                 $lastPID = $result['pid'];
                 
-                echo '<form action="../php/returnAndReserve.php" method="POST">';
+
                 while(true):    // product_list 반복문 
                     echo '<div class="product_list">';
 
@@ -111,8 +110,6 @@
                             $currentSelectPID++;
                             continue;
                         }else{  // 존재
-                            // var_dump($isExsistsProductId);
-                            // echo "no"; 
                             $currentSelectPID++;
                             $cntRental ++;
                         }
@@ -123,7 +120,7 @@
                         $productName = $result['P_Name'];
                         echo "<h3>".$productName."</h3>";
 
-                        $resultRental = $db->query("select * from rentalView where 물품id = $currentSelectPID") or die($db->error);
+                        $resultRental = $db->query("select * from rentalView where 물품id = $currentSelectPID and in_date is null") or die($db->error); 
                         $resultReserve = $db->query("select * from reserveView where 물품id = $currentSelectPID") or die($db->error);
 
                         $idxOfRentalTable = 0;
@@ -131,12 +128,14 @@
                             if($idxOfRentalTable == 0){
                                 echo "<table class='rental-table'><tbody>";  
                             }
-                            echo   "<tr>
-                                        <input type='hidden' name='id' value='".$rowRental['대여id']."'>
+                            echo   "<tr>                                        
                                         <td>".$rowRental['빌린학생']."</td>
-                                        <td>".$rowRental['반납일']."</td>
+                                        <td>".$rowRental['return_date']."</td>"?>
+                                        <form action="../php/returnAndReserve.php" method="post">
+                                        <input type='hidden' name='returnID' value='<?php echo $rowRental['대여id']?>'>
                                         <td><button class='btn-rent' type='submit' name = 'return'>반납</button></td>
-                                    </tr>";
+                                        </form>
+                            <?php echo "</tr>";
 
                             $idxOfRentalTable++;
                         endwhile;
@@ -149,9 +148,12 @@
                             }
                             echo   "<tr>
                                         <td>".$rowReserve['대기학생']."</td>
-                                        <td>".$rowReserve['대기일']."</td>
+                                        <td>".$rowReserve['대기일']."</td>"?>
+                                        <form action="../php/returnAndReserve.php" method="post">
+                                        <input type='hidden' name='reserveID' value='<?php echo $rowRental['대여id']?>'>
                                         <td><button class='btn-reserve' type='submit' name = 'stand'>대기</button></td>
-                                    </tr>";
+                                        </form>
+                            <?php echo "</tr>";
 
                             $idxOfReservationTable++;
                         endwhile;

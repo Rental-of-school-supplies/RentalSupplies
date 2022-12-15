@@ -30,10 +30,10 @@ if (isset($_POST['signIn'])){
     // 로그인시키는 코딩 
     if($role == 'generalMember'){
       $_SESSION['isManager'] = false;
-      $sql = "SELECT * FROM User WHERE SID = '$studentID'";
+      $sql = "SELECT * FROM User WHERE SID = $studentID";
     }else if($role == 'manager'){
       $_SESSION['isManager'] = true;
-      $sql = "SELECT * FROM Manager WHERE MID = '$studentID'";
+      $sql = "SELECT * FROM Manager WHERE MID = $studentID";
     }
     
     $result = mysqli_query($db, $sql);
@@ -50,14 +50,14 @@ if (isset($_POST['signIn'])){
         }else{
           $_SESSION['studentID'] = $row['MID'];
         }
-        $_SESSION['name'] = $row['Name'];
+        // $_SESSION['name'] = $row['Name'];
 
         $_SESSION['isSuccessLogin'] = true;
 
         if($_SESSION['isManager']){
           echo 
           "<script>
-              window.alert('로그인에 성공했습니다');
+              window.alert('관리자로그인에 성공했습니다');
               location.replace('../layout/main_M.php');
           </script>";
         }else{
