@@ -1,14 +1,13 @@
 <?php
 session_start(); 
 include('db.php');
-// require_once('signup.php');
+//require_once('signup.php');
 
 $student =  $_SESSION['studentID'];
 $manager = 2020039063;
 $product_name = '';
 $product_content = '';
 $confirm_pname = '';
-$confirm_check = false;
 
 if(isset($_POST['confirm'])){
     $product_name = $_POST['title'];
@@ -19,13 +18,14 @@ if(isset($_POST['confirm'])){
         echo 
             "<script>
                 window.alert('해당 물품이 이미 존재합니다');
-                history.go(-1);
+                location.replace('../layout/product_req.php');
             </script>";
+            
     } else {
         echo 
             "<script>
                 window.alert('물품 신청이 가능합니다');
-                history.go(-1);
+                location.replace('../layout/product_req.php');
             </script>";
     }
 }
@@ -33,13 +33,13 @@ if(isset($_POST['confirm'])){
 if(isset($_POST['save'])){
 	$product_name = $_POST['title'];
 	$product_content = $_POST['content'];
-    date_default_timezone_set('Asia/Seoul');
-    $time = date('Y-m-d H:i:s', time());
+    $time = date("Y-m-d H:i:s", time());
+    // $time = "SELECT now()";
 
-    $req_query = "INSERT INTO requisition (Req_Pname, Req_Content, MID, SID, Request_Date) VALUES('$product_name','$product_content', $manager, $student, '$time')";
-    $result = mysqli_query($db, $req_query);
+    $requisition = "INSERT INTO requisition (Req_Pname, Req_Content, MID, SID, Request_Date) VALUES('$product_name','$product_content', $manager, $student, $time)";
+	$restult = mysqli_query($db, $requisition);
 
-    if($result){
+	if($result){
         echo 
             "<script>
                 window.alert('물품 신청에 성공했습니다');

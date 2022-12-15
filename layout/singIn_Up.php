@@ -40,10 +40,10 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="#">물품 목록</a></li>
-            <li><a href="#">물품 신청</a></li>
-            <li><a href="#">찾아오시는 길</a></li>
-            <li><a href="#">팀 소개</a></li>
+            <li><a href="product_list_All.php">물품 목록</a></li>
+            <li><a href="product_req.php">물품 신청</a></li>
+            <li><a href="location.html">찾아오시는 길</a></li>
+            <li><a href="team_intro.html">팀 소개</a></li>
         </ul>
     </nav>
 

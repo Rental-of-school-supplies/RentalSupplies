@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php 
+    session_start(); 
+    include('../php/db.php');
+?>
 <html>
 
 <head>
@@ -18,7 +22,6 @@
 </head>
 
 <body>
-    <?php require_once '../php/process.php'; ?>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
         <a href="main_M.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
@@ -40,8 +43,7 @@
         </ul>
     </nav>
     <?php
-    $mysqli = new mysqli('localhost:3306', 'root', '010510', '3idiots') or die(mysqli_error($mysqli));
-    $result = $mysqli->query("SELECT * FROM requisition") or die($mysqli->error);
+    $result = $db->query("SELECT * FROM requisition") or die($mysqli->error);
     ?>
     <section class="product_req">
         <div class="container">

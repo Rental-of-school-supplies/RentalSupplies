@@ -127,6 +127,18 @@ body {
     font-weight: bold;
     margin-top: 7%;
     margin-bottom: 3%;
+    display: inline-block;
+}
+
+.quantity {
+    display: inline-block;
+    background-color: #4568DC;
+    border-radius: 10px;
+    padding: 0.5% 1%;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 2%;
 }
 
 .rental-table {
