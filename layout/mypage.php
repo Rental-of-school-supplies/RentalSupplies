@@ -57,7 +57,7 @@
     </nav>
 
     <?php
-    $result1 = $mysqli->query("SELECT * FROM rental WHERE SID = $studentID AND In_Date = NULL") or die($mysqli->error);
+    $result1 = $db->query("SELECT * FROM rental WHERE SID = $studentID AND In_Date = NULL") or die($mysqli->error);
     ?>
     <section class="current_rental">
         <div class="container">
