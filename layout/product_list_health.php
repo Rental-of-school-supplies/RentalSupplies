@@ -61,42 +61,50 @@
         <div class="container">
         <?php
             $CID = 4;
-            $category_cnt = $db->query("select CID, COUNT(PID) as 해당물품수 from product where CID = $CID group by CID;");
+            $category_cnt = $db->query("select COUNT(PID) as 해당물품수 from product;");
             $cnt_result = $category_cnt->fetch_assoc();
-
-            $select_query = $db->query("select PID from product where CID = $CID order by pid limit 1;") or die($db->error);
+            
+            $select_query = $db->query("select PID from product order by pid limit 1;") or die($db->error());
             $result = $select_query->fetch_assoc();
             $check_pid = $result['PID'];
             $product_cnt = 1;
 
             echo "<h4 class='product_count'>해당 물품 ".$cnt_result['해당물품수']."개</h4>";
-            echo "<div class='row'>";
-            while(true): // product 반복문
-                $select_query = $db->query("select * from product where PID = $check_pid order by pid desc limit 1;") or die($db->error);
+            echo "<div class='row'>";?>
+            <?php while(true): // product 반복문 
+
+                $select_query = $db->query("select * from product where PID = $check_pid order by pid desc limit 1;") or die($db->error());
                 $result = $select_query->fetch_assoc();
-                $avail_query = $db->query("select Left_Quantity as 남은수량 from product where pid = $check_pid") or die($db->error);
+                $avail_query = $db->query("select Left_Quantity as 남은수량 from product where pid = $check_pid") or die($db->error());
                 $availability = $avail_query->fetch_assoc();
 
                 echo "<div class='product col-md-4 col-sm-4'>
                       <img class='product-img' src=".$result['Image_Path']." alt=".$result['P_Name']." style='width: 300px; height:200px;'>
                       <p class='product-name'>".$result['P_Name']."</p>
                       <p class='product-count'>(전체 개수: ".$result['Total_Quantity']." / 남은 수량: ".$result['Left_Quantity'].")</p>
-                      <p class='product-info'>".$result['Content']."</p>";
+                      <p class='product-info'>".$result['Content']."</p>"; ?>
 
-                if ($availability['남은수량'] == 0) 
-                    echo "<button class='btn-reserve' type='submit' name='reserve'>예약하기</button>";
+                <?php if ($availability['남은수량'] == 0): ?>
+                <form action="../php/productrent.php" method="post">
+                <input type="hidden" name="check_pid" value="<?php echo $check_pid?>">
+                <button class='btn-reserve' type='submit' name='reserve'>예약하기</button>
+                </form> 
     
-                else 
-                    echo "<button class='btn-rent' type='submit' name='rent'>대여하기</button>";
+                <?php else: ?>
+                <form action="../php/productrent.php" method="post">
+                <input type="hidden" name="check_pid" value="<?php echo $check_pid?>">
+                <button class='btn-rent' type='submit' name='rent'>대여하기</button>
+                </form> 
+                <?php endif ?>
                 
-                echo "</div>"; // product div 닫음
-
+                <?php echo "</div>"; // product div 닫음
+                
                 $check_pid++;
                 if($result['PID'] != NULL) $product_cnt++;
-                if ($product_cnt > $cnt_result['해당물품수']) break;
-            endwhile;
-            echo "</div>";
-            ?> 
+                if ($product_cnt > $cnt_result['해당물품수']) break; ?>
+                
+            <?php endwhile ?>
+                </div>
             </div>
         </div>
     </section>
