@@ -8,8 +8,8 @@ if (isset($_POST['signIn'])){
 
   // 보안을 더욱 강화 (시큐어코딩, 보안코딩)
   $role = $_POST['role'];
-  $studentID = mysqli_real_escape_string($db, $_POST['studentID']);
-  $password = mysqli_real_escape_string($db, $_POST['password']);
+  $studentID = $_POST['studentID'];
+  $password =  $_POST['password'];
 
   // 에러 체크 
   if(empty($studentID)){
@@ -37,7 +37,7 @@ if (isset($_POST['signIn'])){
     }
     
     $result = mysqli_query($db, $sql);
-    if(mysqli_num_rows($result) === 1){
+    if(mysqli_num_rows($result) > 0){
 
       $row = mysqli_fetch_assoc($result);  // 결과값 저장
       $hash = $row['Password']; // DB안에 있는 암호화된 값을 가져 옴
@@ -46,9 +46,19 @@ if (isset($_POST['signIn'])){
       // password와 hash를 매핑시킴
       if(password_verify($password, $hash)){
         if(($_SESSION['isManager'] != false)){
-          $_SESSION['studentID'] = $row['SID'];
+          $_SESSION['studentID'] = $studentID;
+          $user_id = $_SESSION['studentID'];
+          echo 
+          "<script>
+              window.alert('".$user_id."');
+          </script>";
         }else{
-          $_SESSION['studentID'] = $row['MID'];
+          $_SESSION['studentID'] = $studentID;
+          $user_id = $_SESSION['studentID'];
+          echo 
+          "<script>
+              window.alert('".$user_id."');
+          </script>";
         }
         // $_SESSION['name'] = $row['Name'];
 
