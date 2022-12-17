@@ -30,7 +30,18 @@ if(isset($_POST['reserve'])){
 
     $duplicate_query = $db->query("SELECT PID, SID, Reserve_Date FROM reservation WHERE PID=$product AND SID = $student;");
     $duplicate = $duplicate_query->fetch_assoc();
-        
+
+    if ($time > $delay['종료일']){
+        $delay['연체여부'] = "0";
+        $delay['종료일'] = NULL;
+        $db->query("
+            update user
+            set Overdue_status = '0', Overdue_End_Date = NULL
+            where SID = ".$student.";") or die($db->error);
+    }
+
+    $duplicate_query = $db->query("SELECT PID, SID, Reserve_Date FROM reservation WHERE PID=$product AND SID = $student;");
+    $duplicate = $duplicate_query->fetch_assoc();    
 
     if($delay['연체여부'] == "0") {
         if($duplicate){
