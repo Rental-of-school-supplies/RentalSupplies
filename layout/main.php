@@ -6,23 +6,6 @@
     if(!isset($_SESSION['isSuccessLogin'])){
         $_SESSION['isSuccessLogin'] = false;
     }
-    // else{
-    //     $user = $_SESSION['studentID'];
-    //     $sql = "select * from user where sid = $user";
-    //     $result = mysqli_query($db, $sql);
-    //     $row = mysqli_fetch_assoc($result);
-
-    //     date_default_timezone_set('Asia/Seoul');
-    //     $time = date('Y-m-d H:i:s', time());
-
-    //     if($row['Overdue_End_Date'] < $time){
-    //         $sql_update = $db -> query("
-    //             update user
-    //             set Overdue_status = '0', Overdue_End_Date is null
-    //             where sid = ".$user.";
-    //         ") or die($db->error);
-    //     }
-    // }
 ?>
 <html>
 
@@ -66,8 +49,8 @@
         <ul>
             <li><a href="product_list_All.php">물품 목록</a></li>
             <li><a href="product_req.php">물품 신청</a></li>
-            <li><a href="location.html">찾아오시는 길</a></li>
-            <li><a href="team_intro.html">팀 소개</a></li>
+            <li><a href="location.php">찾아오시는 길</a></li>
+            <li><a href="team_intro.php">팀 소개</a></li>
         </ul>
     </nav>
 
