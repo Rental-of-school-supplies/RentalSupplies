@@ -53,6 +53,7 @@
     </nav>
     <?php
     $result = $db->query("SELECT * FROM requisition") or die($mysqli->error);
+    $record_cnt = 1;
     ?>
     <section class="product_req">
         <div class="container">
@@ -73,7 +74,7 @@
                 <tbody>
                 <?php while ($row = $result->fetch_assoc()):?>
                     <tr>
-                        <td><?php echo $row['ReqID']; ?></td>
+                        <td><?php echo $record_cnt; $record_cnt++; ?></td>
                         <td><?php echo $row['Req_Pname']; ?></td>
                         <td><?php echo $row['Req_Content']; ?></td>
                         <td><?php echo $row['SID']; ?></td>

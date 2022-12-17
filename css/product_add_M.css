@@ -133,23 +133,9 @@ body {
 }
 
 .title_input {
-    margin-right: 2%;
     width: 45%;
     height: 50px;
     font-size: 20px;
-}
-
-.btn_confirm {
-    display: block;
-    margin: auto;
-    margin-top: 20px;
-    text-align: center;
-    background-color: #4568DC;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    padding: 10px 20px;
-    border-radius: 5px;
 }
 
 .product_quantity {
@@ -163,8 +149,7 @@ body {
 }
 
 .quantity_input {
-    margin-right: 3%;
-    width: 45%;
+    width: 50%;
     height: 50px;
     font-size: 20px;
 }
@@ -180,25 +165,7 @@ body {
 }
 
 .explanation_input {
-    margin-right: 3%;
-    width: 45%;
-    height: 50px;
-    font-size: 20px;
-}
-
-.product_reason {
-    margin-bottom: 2%;
-}
-
-.reason_text {
-    font-size: 20px;
-    font-weight: bold;
-    margin-right: 3%;
-}
-
-.reason_input {
-    margin-right: 3%;
-    width: 45%;
+    width: 50%;
     height: 50px;
     font-size: 20px;
 }
@@ -214,8 +181,7 @@ body {
 }
 
 .category-list {
-    margin-right: 3%;
-    width: 45%;
+    width: 50%;
     height: 50px;
     font-size: 20px;
 }
@@ -231,8 +197,7 @@ body {
 }
 
 .file_input {
-    margin-right: 3%;
-    width: 45%;
+    width: 50%;
     height: 50px;
     font-size: 20px;
     display: inline-block !important;
