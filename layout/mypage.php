@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <?php 
-    session_start(); 
+    session_start();
     include('../php/db.php');
     include('../php/productrent.php'); 
     
     if(!isset($_SESSION['isSuccessLogin'])){
         $_SESSION['isSuccessLogin'] = false;
     }
+
+    $studentID = $_SESSION['studentID'];
 ?>
 <html>
 
@@ -28,7 +30,6 @@
 </head>
 
 <body>
-    <?php require_once '../php/process.php'; ?>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
         <a href="main.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
@@ -49,20 +50,33 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="product_list_All.html">물품 목록</a></li>
-            <li><a href="product_req.html">물품 신청</a></li>
+            <li><a href="product_list_All.php">물품 목록</a></li>
+            <li><a href="product_req.php">물품 신청</a></li>
             <li><a href="location.html">찾아오시는 길</a></li>
             <li><a href="team_intro.html">팀 소개</a></li>
         </ul>
     </nav>
 
     <?php
-    $result1 = $db->query("SELECT * FROM rental WHERE SID = $studentID AND In_Date = NULL") or die($mysqli->error);
+    $record_cnt = 1;
+    $result = $db->query("SELECT p.P_Name AS 물품명, r.Out_Date AS 대여일, r.Return_Date AS 반납기한
+                          FROM product AS p, rental AS r 
+                          WHERE SID = $studentID 
+                          AND p.PID = r.PID
+                          AND In_Date is NULL") or die($mysqli->error);
+
+    $result_cnt = $db->query("SELECT COUNT(p.P_Name) AS 개수 
+                              FROM product AS p, rental AS r 
+                              WHERE p.PID = r.PID
+                              AND In_Date is NULL
+                              GROUP BY SID
+                              Having SID = $studentID") or die($mysqli->error);
+    $query = $result_cnt->fetch_assoc();
     ?>
     <section class="current_rental">
         <div class="container">
             <h3 class="table-name">현재 대여 중인 물품</h3>
-            <h3 class="quantity">3개</h3>
+            <h3 class="quantity"><?php echo $query['개수']?>개</h3>
             <table class="rental-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
@@ -76,11 +90,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php while ($row = $result1->fetch_assoc()):?>
+                <?php while ($row = $result->fetch_assoc()):?>
                     <tr>
-                        <td><?php echo $row['ReqID']; ?></td>
-                        <td><?php echo $row['Req_Pname']; ?></td>
-                        <td><?php echo $row['Req_Content']; ?></td>
+                        <td><?php echo $record_cnt; $record_cnt++; ?></td>
+                        <td><?php echo $row['물품명']; ?></td>
+                        <td><?php echo $row['대여일']; ?></td>
+                        <td><?php echo $row['반납기한']; ?></td>
                     </tr>
                 <?php endwhile; ?>
                 </tbody>
@@ -88,10 +103,26 @@
         </div>
     </section>
 
+    <?php
+    $record_cnt = 1;
+    $result = $db->query("SELECT p.P_Name AS 물품명, r.Out_Date AS 대여일, r.In_Date AS 반납일, r.Return_Date AS 반납기한
+                          FROM product AS p, rental AS r 
+                          WHERE SID = $studentID 
+                          AND p.PID = r.PID
+                          AND In_Date is NOT NULL") or die($mysqli->error);
+
+    $result_cnt = $db->query("SELECT COUNT(p.P_Name) AS 개수 
+                              FROM product AS p, rental AS r 
+                              WHERE p.PID = r.PID
+                              AND In_Date is NOT NULL
+                              GROUP BY SID
+                              Having SID = $studentID") or die($mysqli->error);
+    $query = $result_cnt->fetch_assoc();
+    ?>
     <section class="pre_rental">
         <div class="container">
             <h3 class="table-name">나의 물품 대여 내역</h3>
-            <h3 class="quantity">3개</h3>
+            <h3 class="quantity"><?php echo $query['개수']?>개</h3>
             <table class="rental-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
@@ -106,34 +137,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php while ($row = $result1->fetch_assoc()):?>
+                <?php while ($row = $result->fetch_assoc()):?>
                     <tr>
-                        <td><?php echo $row['ReqID']; ?></td>
-                        <td><?php echo $row['Req_Pname']; ?></td>
-                        <td><?php echo $row['Req_Content']; ?></td>
+                        <td><?php echo $record_cnt; $record_cnt++; ?></td>
+                        <td><?php echo $row['물품명']; ?></td>
+                        <td><?php echo $row['대여일']; ?></td>
+                        <td><?php echo $row['반납일']; ?></td>
+                        <td>
+                            <?php 
+                            if($row['반납일'] > $row['반납기한']) echo '연체'; 
+                            else echo '정상 반납'
+                            ?>
+                        </td>
                     </tr>
                 <?php endwhile; ?>
-                    <tr>
-                        <td>1</td>
-                        <td>공학용 계산기</td>
-                        <td>2022-11-18</td>
-                        <td>2022-11-20</td>
-                        <td>정상 반납</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>보조 배터리</td>
-                        <td>2022-11-18</td>
-                        <td>2022-12-01</td>
-                        <td>연체</td>                        
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>우산</td>
-                        <td>2022-12-01</td>
-                        <td>2022-12-03</td>
-                        <td>정상 반납</td>
-                    </tr>
                 </tbody>
             </table>
         </div>

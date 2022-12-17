@@ -3,6 +3,10 @@
     session_start(); 
     include('../php/db.php');    
     include('../php/returnAndReserve.php');
+
+    if(!isset($_SESSION['isSuccessLogin'])){
+        $_SESSION['isSuccessLogin'] = false;
+    }
 ?>
 <html>
 
@@ -33,8 +37,7 @@
         <ul>
             <?php 
                 if($_SESSION['isSuccessLogin']){ //로그인 성공시 -> 로그아웃 출현 
-                    echo '<li><a href="../php/logout.php">log out</a></li> 
-                            <li><a href="./mypage.php">my page</a></li>';
+                    echo '<li><a href="../php/logout.php">log out</a></li>';
                 }else{
                     echo '<li><a href="./singIn_Up.php">sign in / sign up</a></li>';
                 }  
