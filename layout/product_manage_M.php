@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <?php 
     session_start();
+    include('../php/db.php');
+    include('../php/productManage.php'); 
+
     if(!isset($_SESSION['isSuccessLogin'])){
         $_SESSION['isSuccessLogin'] = false;
     }
@@ -44,17 +47,23 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="product_list_M.html">물품 목록</a></li>
+            <li><a href="product_list_M.php">물품 목록</a></li>
             <li><a href="product_req_M.php">물품 신청</a></li>
             <li><a href="product_manage_M.php">물품 관리</a></li>
-            <li><a href="team_intro_M.html">팀 소개</a></li>
+            <li><a href="team_intro_M.php">팀 소개</a></li>
         </ul>
     </nav>
 
     <section class="current_product">
         <div class="container">
             <h3 class="table-name">물품 리스트</h3>
-            <button id="insertButton">물품 추가하기</button>
+            <button id="insertButton" onclick="location.href='product_add_M.php'" >물품 추가하기</button>
+            
+            <?php 
+                $result = $db->query("select * from product")or die($db->error);
+                $cnt = 1;
+            ?>
+            
             <table class="product-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
@@ -65,27 +74,19 @@
                         <th>물품명</th>
                         <th>전체 개수</th>
                         <th>남은 수량</th>
-                        <th>수정</th>
                         <th>삭제</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php while($row = $result->fetch_assoc()): ?>
                     <tr>
-                        <td><input type="hidden" id="1" name="id" value="1"></td>
-                        <td>보조 배터리</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td><a href="" class="btn btn-info">EDIT </a></td>
-                        <td><a href="" class="btn btn-danger">DELETE</a></td>
+                        <td><?php echo $cnt; $cnt++;?></td>
+                        <td><?php echo $row['P_Name']?></td>
+                        <td><?php echo $row['Total_Quantity']?></td>
+                        <td><?php echo $row['Left_Quantity'] ?></td>
+                        <td><a href="../php/productManage.php?deleteCID=<?php echo $row['CID'];?>&&deletePID=<?php echo $row['PID']; ?>" class="btn btn-danger">DELETE</a></td>
                     </tr>
-                    <tr>
-                    <td><input type="hidden" id="2" name="id" value="2"></td>
-                        <td>담요</td>
-                        <td>10</td>
-                        <td>6</td>
-                        <td><a href="" class="btn btn-info">EDIT </a></td>
-                        <td><a href="" class="btn btn-danger">DELETE</a></td>
-                    </tr>
+                    <?php endwhile; ?>
                 </tbody>
             </table>
         </div>

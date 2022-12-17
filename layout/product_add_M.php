@@ -43,10 +43,10 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="product_list_M.html">물품 목록</a></li>
+            <li><a href="product_list_M.php">물품 목록</a></li>
             <li><a href="product_req_M.php">물품 신청</a></li>
             <li><a href="product_manage_M.php">물품 관리</a></li>
-            <li><a href="team_intro_M.html">팀 소개</a></li>
+            <li><a href="team_intro_M.php">팀 소개</a></li>
         </ul>
     </nav>
 
@@ -86,7 +86,6 @@
                         <img src="" width="100" style="display:none;" />
                         <br>
                 </div>
-
                 <button class="btn_submit" type="submit" name="save">제출하기</button>
             </form>
         </div>

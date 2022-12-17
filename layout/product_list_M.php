@@ -30,7 +30,7 @@
 <body>
     <p class="main">충북대학교<span class="main_dep"> 소프트웨어학부</span></p>
     <div class="logo">
-        <img src="../src/logo.PNG" alt="logo" height="120px">
+        <a href="main_M.php"><img src="../src/logo.PNG" alt="logo" height="120px"></a>
         <span class="title">학생회 <span>물품대여</span></span>
     </div>
     <div class="sub_title">
@@ -50,7 +50,7 @@
             <li><a href="product_list_M.php">물품 목록</a></li>
             <li><a href="product_req_M.php">물품 신청</a></li>
             <li><a href="product_manage_M.php">물품 관리</a></li>
-            <li><a href="team_intro_M.html">팀 소개</a></li>
+            <li><a href="team_intro_M.php">팀 소개</a></li>
         </ul>
     </nav>
 
@@ -104,7 +104,7 @@
                             select exists(
                                 select 1
                                 from product
-                                where pid = '$currentSelectPID'
+                                where pid = $currentSelectPID
                             ) as cnt;
                         ") or die($db->error);
                         $result = $isExsistsProductId_query->fetch_assoc();
@@ -112,9 +112,6 @@
                         if($isExsistsProductId == "0"){  //해당 물품 존재X
                             $currentSelectPID++;
                             continue;
-                        }else{  // 존재
-                            $currentSelectPID++;
-                            $cntRental ++;
                         }
 
                         echo "<div class='product'>";
@@ -163,6 +160,8 @@
                         echo "</tbody></table>";
 
                     echo "</div>";
+                    $currentSelectPID++;
+                    $cntRental ++;
                     endfor;
                     echo "</div>";
                     

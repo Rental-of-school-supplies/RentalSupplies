@@ -47,18 +47,18 @@ if (isset($_POST['signIn'])){
       if(password_verify($password, $hash)){
         if(($_SESSION['isManager'] != false)){
           $_SESSION['studentID'] = $studentID;
-          $user_id = $_SESSION['studentID'];
-          echo 
-          "<script>
-              window.alert('".$user_id."');
-          </script>";
+          // $user_id = $_SESSION['studentID'];
+          // echo 
+          // "<script>
+          //     window.alert('".$user_id."');
+          // </script>";
         }else{
           $_SESSION['studentID'] = $studentID;
-          $user_id = $_SESSION['studentID'];
-          echo 
-          "<script>
-              window.alert('".$user_id."');
-          </script>";
+          // $user_id = $_SESSION['studentID'];
+          // echo 
+          // "<script>
+          //     window.alert('".$user_id."');
+          // </script>";
         }
         // $_SESSION['name'] = $row['Name'];
 
