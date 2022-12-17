@@ -70,7 +70,7 @@
         <div class="container">
         <?php
             $CID = 2;
-            $category_cnt = $db->query("select COUNT(PID) as 해당물품수 from product;");
+            $category_cnt = $db->query("select COUNT(PID) as 해당물품수 from product where CID = $CID group by CID;");
             $cnt_result = $category_cnt->fetch_assoc();
             
             $select_query = $db->query("select PID from product where CID = $CID order by pid limit 1;") or die($db->error());
