@@ -17,7 +17,7 @@ if(isset($_POST['reserve'])){
     $product = $_POST['check_pid'];
     $category_query = $db->query("SELECT PID, CID, P_Name FROM product WHERE PID = $product");
     $result = $category_query->fetch_assoc();
-    $product = $result['PID'];
+    $category = $result['CID'];
 
     if ($time > $delay['종료일']){
         $delay['연체여부'] = "0";
@@ -36,7 +36,7 @@ if(isset($_POST['reserve'])){
         if($duplicate){
             echo 
                 "<script>
-                    window.alert('이미 예약 중인 물품입니다. \\예약일: ".$duplicate['Reserve_Date']."');
+                    window.alert('이미 예약 중인 물품입니다.\\n예약일: ".$duplicate['Reserve_Date']."');
                     location.replace('../layout/product_list_All.php');
                 </script>";
         }
@@ -52,7 +52,7 @@ if(isset($_POST['reserve'])){
     else {
         echo 
             "<script>
-                window.alert('연체 기간이 아직 종료되지 않았습니다. \\n종료일: ".$delay['종료일']."');
+                window.alert('연체 기간이 아직 종료되지 않았습니다.\\n종료일: ".$delay['종료일']."');
                 location.replace('../layout/product_list_All.php');
             </script>";
     }	
