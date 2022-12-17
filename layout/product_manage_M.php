@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <?php 
     session_start();
+    include('../php/db.php');
+    include('../php/productManage.php'); 
+
     if(!isset($_SESSION['isSuccessLogin'])){
         $_SESSION['isSuccessLogin'] = false;
     }
@@ -32,17 +35,22 @@
     </div>
     <div class="sub_title">
         <ul>
-            <li><a href="#">sign in / sign up</a></li>
-            <li><a href="#">my page</a></li>
+            <?php 
+                if($_SESSION['isSuccessLogin']){ //로그인 성공시 -> 로그아웃 출현 
+                    echo '<li><a href="../php/logout.php">log out</a></li>';
+                }else{
+                    echo '<li><a href="./singIn_Up.php">sign in / sign up</a></li>';
+                }  
+            ?>
         </ul>
     </div>
 
     <nav class="navbar">
         <ul>
-            <li><a href="product_list_M.html">물품 목록</a></li>
+            <li><a href="product_list_M.php">물품 목록</a></li>
             <li><a href="product_req_M.php">물품 신청</a></li>
             <li><a href="product_manage_M.php">물품 관리</a></li>
-            <li><a href="team_intro_M.html">팀 소개</a></li>
+            <li><a href="team_intro_M.php">팀 소개</a></li>
         </ul>
     </nav>
 
@@ -66,7 +74,6 @@
                         <th>물품명</th>
                         <th>전체 개수</th>
                         <th>남은 수량</th>
-                        <th>수정</th>
                         <th>삭제</th>
                     </tr>
                 </thead>
@@ -77,8 +84,7 @@
                         <td><?php echo $row['P_Name']?></td>
                         <td><?php echo $row['Total_Quantity']?></td>
                         <td><?php echo $row['Left_Quantity'] ?></td>
-                        <td><a href="product_manage_M.php?edit=<?php echo $row['PID']; ?>" class="btn btn-info">EDIT</a></td>
-                        <td><a href="../php/productManage.php?delete=<?php echo $row['PID']; ?>" class="btn btn-danger">DELETE</a></td>
+                        <td><a href="../php/productManage.php?deleteCID=<?php echo $row['CID'];?>&&deletePID=<?php echo $row['PID']; ?>" class="btn btn-danger">DELETE</a></td>
                     </tr>
                     <?php endwhile; ?>
                 </tbody>
