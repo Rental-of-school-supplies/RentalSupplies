@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php 
     session_start();
     include('../php/db.php');

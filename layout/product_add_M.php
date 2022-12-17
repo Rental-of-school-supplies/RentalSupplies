@@ -55,32 +55,32 @@
             <form action="../php/productManage.php" method="post" enctype="multipart/form-data">
                 <div class="product_name">
                     <label class="title_text" for="title">추가할 물품 이름</label>
-                    <input class="title_input" type="text" name="title" maxlength="100" required="required" pattern=".{1,100}">
+                    <input class="title_input" type="text" name="title" maxlength="100" value="<?php echo $title; ?>" required="required" pattern=".{1,100}">
                 </div>
 
                 <div class="product_quantity">
                     <label class="quantity_text" for="quantity">전체 수량</label>
-                    <input class="quantity_input" type="text" name="quantity" maxlength="100" required="required" pattern=".{1,2}">
+                    <input class="quantity_input" type="text" name="quantity" maxlength="100" value="<?php echo $quantity; ?>" required="required" pattern=".{1,2}">
                 </div>
 
                 <div class="product_explanation">
                     <label class="explanation_text" for="explanation">물품 설명</label>
-                    <input class="explanation_input" type="text" name="explanation" maxlength="100" required="required" pattern=".{4,100}">
+                    <input class="explanation_input" type="text" name="explanation" maxlength="100" value="<?php echo $explanation; ?>" required="required" pattern=".{4,100}">
                 </div>
 
                 <div class="category">
                     <label class="category_text" for="cate">카테고리</label>
-                    <select class="category-list" for="category-list" name="category">
-                        <option value="2">생필품</option>
-                        <option value="3">전자기기</option>
-                        <option value="4">운동기구</option>
-                        <option value="5">문구류</option>
+                    <select class="category-list" for="category-list">
+                        <option value="daily-p">생필품</option>
+                        <option value="electronics">전자기기</option>
+                        <option value="sports">운동기구</option>
+                        <option value="stationary">문구류</option>
                     </select>
                 </div>
 
                 <div class="attach_file">
                     <label class="file_text" for="file">파일 첨부</label>
-                    <input class="file_input" type="file" name="myfile" maxlength="100" required="required">
+                    <input class="file_input" type="file" name="myfile" maxlength="100" value="<?php echo $myfile; ?>" required="required">
                         <br>
                         <img src="" width="100" style="display:none;" />
                         <br>

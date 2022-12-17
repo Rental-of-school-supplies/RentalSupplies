@@ -60,12 +60,12 @@
                         
                 $resultRental = $db->query("
                     CREATE OR REPLACE VIEW rentalView 
-                    as select rental.rentalid as 대여id, product.pid as 물품id, product.p_name as 대여물품, rental.sid as 빌린학생, rental.in_date, rental.return_date  
+                    as select rental.rentalID as 대여id, product.PID as 물품id, product.P_Name as 대여물품, rental.SID as 빌린학생, rental.In_Date, rental.Return_Date  
                     from manager, manages, product, rental 
-                    where manager.mid = manages.mid 
-                    and manages.cid = product.cid and manages.pid = product.pid 
-                    and product.cid = rental.cid and product.pid = rental.pid
-                    order by product.pid, rental.return_date;
+                    where manager.MID = manages.MID 
+                    and manages.CID = product.CID and manages.PID = product.PID 
+                    and product.CID = rental.CID and product.PID = rental.PID
+                    order by product.PID, rental.Return_Date;
                     ") or die($db->error);
                 
 
@@ -83,9 +83,9 @@
                 $currentSelectPID = 1;  //물품 id인 pid는 1부터 시작함
                 $isEmptyProductTable = false;   
                 
-                $select_query = $db->query("select pid from product order by pid desc limit 1;") or die($db->error);
+                $select_query = $db->query("select PID from product order by PID desc limit 1;") or die($db->error);
                 $result = $select_query->fetch_assoc();
-                $lastPID = $result['pid'];
+                $lastPID = $result['PID'];
                 
 
                 while(true):    // product_list 반복문 
@@ -130,7 +130,7 @@
                             }
                             echo   "<tr>                                        
                                         <td>".$rowRental['빌린학생']."</td>
-                                        <td>".$rowRental['return_date']."</td>"?>
+                                        <td>".$rowRental['Return_Date']."</td>"?>
                                         <form action="../php/returnAndReserve.php" method="post">
                                         <input type='hidden' name='returnID' value='<?php echo $rowRental['대여id']?>'>
                                         <td><button class='btn-rent' type='submit' name = 'return'>반납</button></td>

@@ -2,7 +2,6 @@
 <?php 
     session_start();
     include('../php/db.php');
-    include('../php/productrent.php'); 
     
     if(!isset($_SESSION['isSuccessLogin'])){
         $_SESSION['isSuccessLogin'] = false;
@@ -96,6 +95,48 @@
                         <td><?php echo $row['물품명']; ?></td>
                         <td><?php echo $row['대여일']; ?></td>
                         <td><?php echo $row['반납기한']; ?></td>
+                    </tr>
+                <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <?php
+    $record_cnt = 1;
+    $result = $db->query("SELECT p.P_Name AS 물품명, r.Reserve_Date AS 예약일
+                          FROM product AS p, reservation AS r 
+                          WHERE SID = $studentID 
+                          AND p.PID = r.PID") or die($mysqli->error);
+
+    $result_cnt = $db->query("SELECT COUNT(p.P_Name) AS 개수 
+                              FROM product AS p, reservation AS r 
+                              WHERE p.PID = r.PID
+                              GROUP BY SID
+                              Having SID = $studentID") or die($mysqli->error);
+    $query = $result_cnt->fetch_assoc();
+    ?>
+    <section class="current_rental">
+        <div class="container">
+            <h3 class="table-name">현재 예약 중인 물품</h3>
+            <h3 class="quantity"><?php echo $query['개수']?>개</h3>
+            <table class="rental-table">
+                <colgroup>
+                    <col style="width: 5%;" span="1">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>물품명</th>
+                        <th>예약일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php while ($row = $result->fetch_assoc()):?>
+                    <tr>
+                        <td><?php echo $record_cnt; $record_cnt++; ?></td>
+                        <td><?php echo $row['물품명']; ?></td>
+                        <td><?php echo $row['예약일']; ?></td>
                     </tr>
                 <?php endwhile; ?>
                 </tbody>
