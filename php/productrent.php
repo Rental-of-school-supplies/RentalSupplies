@@ -27,15 +27,27 @@ if(isset($_POST['reserve'])){
             set Overdue_status = '0', Overdue_End_Date = NULL
             where SID = ".$student.";") or die($db->error);
     }
+
+    $duplicate_query = $db->query("SELECT PID, SID, Reserve_Date FROM reservation WHERE PID=$product AND SID = $student;");
+    $duplicate = $duplicate_query->fetch_assoc();
         
 
     if($delay['연체여부'] == "0") {
-        $db->query("INSERT INTO reservation (SID, Reserve_Date, CID, PID) VALUES($student, '$time', $category, $product)") or die($db->error);
+        if($duplicate){
+            echo 
+                "<script>
+                    window.alert('이미 예약 중인 물품입니다. \\예약일: ".$duplicate['Reserve_Date']."');
+                    location.replace('../layout/product_list_All.php');
+                </script>";
+        }
+        else {
+            $db->query("INSERT INTO reservation (SID, Reserve_Date, CID, PID) VALUES($student, '$time', $category, $product)") or die($db->error);
         echo 
             "<script>
                 window.alert('".$catagory_query['P_Name']." 예약 성공하셨습니다.');
                 location.replace('../layout/product_list_All.php');
             </script>";
+        }
     }
     else {
         echo 
