@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+    session_start(); 
+    if(!isset($_SESSION['isSuccessLogin'])){
+        $_SESSION['isSuccessLogin'] = false;
+    }
+?>
 <html>
 
 <head>
@@ -25,8 +31,13 @@
     </div>
     <div class="sub_title">
         <ul>
-            <li><a href="#">sign in / sign up</a></li>
-            <li><a href="#">my page</a></li>
+            <?php 
+                if($_SESSION['isSuccessLogin']){ //로그인 성공시 -> 로그아웃 출현 
+                    echo '<li><a href="../php/logout.php">log out</a></li>';
+                }else{
+                    echo '<li><a href="./singIn_Up.php">sign in / sign up</a></li>';
+                }  
+            ?>
         </ul>
     </div>
 
