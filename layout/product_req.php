@@ -8,7 +8,7 @@
 <html>
 
 <head>
-    <title>product_req</title>
+    <title>Rental-Of-school-supplies</title>
     <link rel="stylesheet" href="../css/product_req.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
