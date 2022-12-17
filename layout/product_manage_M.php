@@ -1,6 +1,8 @@
-<!DOCTYPE html>
 <?php 
     session_start();
+    include('../php/db.php');
+    include('../php/productManage.php'); 
+
     if(!isset($_SESSION['isSuccessLogin'])){
         $_SESSION['isSuccessLogin'] = false;
     }
@@ -44,10 +46,10 @@
 
     <nav class="navbar">
         <ul>
-            <li><a href="product_list_M.html">물품 목록</a></li>
+            <li><a href="product_list_M.php">물품 목록</a></li>
             <li><a href="product_req_M.php">물품 신청</a></li>
             <li><a href="product_manage_M.php">물품 관리</a></li>
-            <li><a href="team_intro_M.html">팀 소개</a></li>
+            <li><a href="team_intro_M.php">팀 소개</a></li>
         </ul>
     </nav>
 
@@ -71,20 +73,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="hidden" id="1" name="id" value="1"></td>
-                        <td>보조 배터리</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td><a href="" class="btn btn-info">EDIT </a></td>
-                        <td><a href="" class="btn btn-danger">DELETE</a></td>
-                    </tr>
-                    <tr>
-                    <td><input type="hidden" id="2" name="id" value="2"></td>
-                        <td>담요</td>
-                        <td>10</td>
-                        <td>6</td>
-                        <td><a href="" class="btn btn-info">EDIT </a></td>
-                        <td><a href="" class="btn btn-danger">DELETE</a></td>
+                        <td><?php echo $cnt; $cnt++;?></td>
+                        <td><?php echo $row['P_Name']?></td>
+                        <td><?php echo $row['Total_Quantity']?></td>
+                        <td><?php echo $row['Left_Quantity'] ?></td>
+                        <td><a href="product_add_M.php?editCID=<?php echo $row['CID'];?>&&editPID=<?php echo $row['PID']; ?>" class="btn btn-info">EDIT</a></td>
+                        <td><a href="../php/productManage.php?deleteCID=<?php echo $row['CID'];?>&&deletePID=<?php echo $row['PID']; ?>" class="btn btn-danger">DELETE</a></td>
                     </tr>
                 </tbody>
             </table>
