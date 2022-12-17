@@ -1,9 +1,28 @@
 <!DOCTYPE html>
 <?php 
     session_start(); 
+    include('../php/db.php');
+
     if(!isset($_SESSION['isSuccessLogin'])){
         $_SESSION['isSuccessLogin'] = false;
     }
+    // else{
+    //     $user = $_SESSION['studentID'];
+    //     $sql = "select * from user where sid = $user";
+    //     $result = mysqli_query($db, $sql);
+    //     $row = mysqli_fetch_assoc($result);
+
+    //     date_default_timezone_set('Asia/Seoul');
+    //     $time = date('Y-m-d H:i:s', time());
+
+    //     if($row['Overdue_End_Date'] < $time){
+    //         $sql_update = $db -> query("
+    //             update user
+    //             set Overdue_status = '0', Overdue_End_Date is null
+    //             where sid = ".$user.";
+    //         ") or die($db->error);
+    //     }
+    // }
 ?>
 <html>
 

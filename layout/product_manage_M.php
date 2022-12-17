@@ -53,7 +53,13 @@
     <section class="current_product">
         <div class="container">
             <h3 class="table-name">물품 리스트</h3>
-            <button id="insertButton">물품 추가하기</button>
+            <button id="insertButton" onclick="location.href='product_add_M.php'" >물품 추가하기</button>
+            
+            <?php 
+                $result = $db->query("select * from product")or die($db->error);
+                $cnt = 1;
+            ?>
+            
             <table class="product-table">
                 <colgroup>
                     <col style="width: 5%;" span="1">
@@ -69,22 +75,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php while($row = $result->fetch_assoc()): ?>
                     <tr>
-                        <td><input type="hidden" id="1" name="id" value="1"></td>
-                        <td>보조 배터리</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td><a href="" class="btn btn-info">EDIT </a></td>
-                        <td><a href="" class="btn btn-danger">DELETE</a></td>
+                        <td><?php echo $cnt; $cnt++;?></td>
+                        <td><?php echo $row['P_Name']?></td>
+                        <td><?php echo $row['Total_Quantity']?></td>
+                        <td><?php echo $row['Left_Quantity'] ?></td>
+                        <td><a href="product_manage_M.php?edit=<?php echo $row['PID']; ?>" class="btn btn-info">EDIT</a></td>
+                        <td><a href="../php/productManage.php?delete=<?php echo $row['PID']; ?>" class="btn btn-danger">DELETE</a></td>
                     </tr>
-                    <tr>
-                    <td><input type="hidden" id="2" name="id" value="2"></td>
-                        <td>담요</td>
-                        <td>10</td>
-                        <td>6</td>
-                        <td><a href="" class="btn btn-info">EDIT </a></td>
-                        <td><a href="" class="btn btn-danger">DELETE</a></td>
-                    </tr>
+                    <?php endwhile; ?>
                 </tbody>
             </table>
         </div>
