@@ -29,8 +29,7 @@ if(isset($_POST['reserve'])){
     }
 
     $duplicate_query = $db->query("SELECT PID, SID, Reserve_Date FROM reservation WHERE PID=$product AND SID = $student;");
-    $duplicate = $duplicate_query->fetch_assoc();
-        
+    $duplicate = $duplicate_query->fetch_assoc();    
 
     if($delay['연체여부'] == "0") {
         if($duplicate){
