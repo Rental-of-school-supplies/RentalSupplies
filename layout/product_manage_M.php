@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <?php 
     session_start();
-    include('../php/db.php');
-    include('../php/productManage.php'); 
+    if(!isset($_SESSION['isSuccessLogin'])){
+        $_SESSION['isSuccessLogin'] = false;
+    }
 ?>
 <html>
 
 <head>
-    <title>product_req_M</title>
+    <title>Rental-Of-school-supplies</title>
     <link rel="stylesheet" href="../css/product_manage_M.css" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
@@ -31,13 +32,8 @@
     </div>
     <div class="sub_title">
         <ul>
-            <?php 
-                if($_SESSION['isSuccessLogin']){ //로그인 성공시 -> 로그아웃 출현 
-                    echo '<li><a href="../php/logout.php">log out</a></li>';
-                }else{
-                    echo '<li><a href="./singIn_Up.php">sign in / sign up</a></li>';
-                }  
-            ?>  
+            <li><a href="#">sign in / sign up</a></li>
+            <li><a href="#">my page</a></li>
         </ul>
     </div>
 
